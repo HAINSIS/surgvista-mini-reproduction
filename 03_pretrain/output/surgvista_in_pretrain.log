@@ -1,0 +1,23 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+03_pretrain\pretrain.py:91: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:837.)
+  acc[k] += float(res.get(k, torch.tensor(0.0))) / steps_per_epoch
+encoder init from ImageNet: ([], [])
+surgvista_in: 3113 train clips, 194 steps/epoch, up to 16 epochs, cap 30.0 min
+{'epoch': 1, 'minutes': 1.94, 'lr': 7.461340206185566e-05, 'loss': 0.96531, 'loss_vid': 0.95168, 'loss_img': 0.2726}
+{'epoch': 2, 'minutes': 3.87, 'lr': 0.00014961340206185567, 'loss': 0.89202, 'loss_vid': 0.88133, 'loss_img': 0.21372}
+{'epoch': 3, 'minutes': 5.7, 'lr': 0.00014813884871350694, 'loss': 0.81995, 'loss_vid': 0.8103, 'loss_img': 0.19284}
+{'epoch': 4, 'minutes': 7.37, 'lr': 0.0001426102603244407, 'loss': 0.80518, 'loss_vid': 0.79581, 'loss_img': 0.18745}
+{'epoch': 5, 'minutes': 9.2, 'lr': 0.00013369141116684622, 'loss': 0.80081, 'loss_vid': 0.79154, 'loss_img': 0.18539}
+{'epoch': 6, 'minutes': 11.13, 'lr': 0.00012182952957935597, 'loss': 0.79598, 'loss_vid': 0.78682, 'loss_img': 0.18332}
+{'epoch': 7, 'minutes': 13.06, 'lr': 0.00010761941983567073, 'loss': 0.79094, 'loss_vid': 0.78186, 'loss_img': 0.18149}
+{'epoch': 8, 'minutes': 14.91, 'lr': 9.177363617458968e-05, 'loss': 0.78772, 'loss_vid': 0.77869, 'loss_img': 0.1806}
+{'epoch': 9, 'minutes': 16.83, 'lr': 7.508675235510974e-05, 'loss': 0.7847, 'loss_vid': 0.77574, 'loss_img': 0.17935}
+{'epoch': 10, 'minutes': 18.4, 'lr': 5.839551841029827e-05, 'loss': 0.77912, 'loss_vid': 0.77023, 'loss_img': 0.1778}
+{'epoch': 11, 'minutes': 19.23, 'lr': 4.253690250667143e-05, 'loss': 0.77515, 'loss_vid': 0.76629, 'loss_img': 0.17712}
+{'epoch': 12, 'minutes': 20.05, 'lr': 2.830612186545009e-05, 'loss': 0.77241, 'loss_vid': 0.76358, 'loss_img': 0.17653}
+{'epoch': 13, 'minutes': 20.83, 'lr': 1.6416767250550074e-05, 'loss': 0.76883, 'loss_vid': 0.76005, 'loss_img': 0.17572}
+{'epoch': 14, 'minutes': 21.62, 'lr': 7.4650205479838e-06, 'loss': 0.76684, 'loss_vid': 0.75806, 'loss_img': 0.17554}
+{'epoch': 15, 'minutes': 22.41, 'lr': 1.8997597166569096e-06, 'loss': 0.76557, 'loss_vid': 0.75681, 'loss_img': 0.1752}
+{'epoch': 16, 'minutes': 23.19, 'lr': 5.017315756195017e-11, 'loss': 0.76415, 'loss_vid': 0.75541, 'loss_img': 0.17485}
+done 03_pretrain\output\original_recon.png

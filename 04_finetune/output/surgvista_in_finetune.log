@@ -1,0 +1,8 @@
+04_finetune\finetune.py:106: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:837.)
+  step += 1; tot += float(loss) / spe
+load surgvista_in _IncompatibleKeys(missing_keys=['head.weight', 'head.bias', 'fc_norm.weight', 'fc_norm.bias'], unexpected_keys=[])
+surgvista_in: 3113 train / 788 test clips, 389 steps/epoch
+{'epoch': 1, 'minutes': 3.45, 'train_loss': 0.4172, 'mAP_I': 0.3251, 'n_classes_I': 5, 'mAP_V': 0.289, 'n_classes_V': 7, 'mAP_T': 0.198, 'n_classes_T': 12, 'mAP_IVT': 0.097, 'n_classes_IVT': 28}{{'epoch': 2, 'minutes': 7.02, 'train_loss': 0.1632, 'mAP_I': 0.3158, 'n_classes_I': 5, 'mAP_V': 0.2257, 'n_classes_V': 7, 'mAP_T': 0.1468, 'n_classes_T': 12, 'mAP_IVT': 0.0766, 'n_classes_IVT': 28}{{'epoch': 3, 'minutes': 10.55, 'train_loss': 0.0743, 'mAP_I': 0.3112, 'n_classes_I': 5, 'mAP_V': 0.2326, 'n_classes_V': 7, 'mAP_T': 0.1749, 'n_classes_T': 12, 'mAP_IVT': 0.1053, 'n_classes_IVT': 28}
+{'epoch': 4, 'minutes': 13.66, 'train_loss': 0.052, 'mAP_I': 0.3077, 'n_classes_I': 5, 'mAP_V': 0.2338, 'n_classes_V': 7, 'mAP_T': 0.1701, 'n_classes_T': 12, 'mAP_IVT': 0.1002, 'n_classes_IVT': 28}
+FINAL {'init': 'surgvista_in', 'seed': 0, 'epochs_run': 4, 'epoch': 4, 'minutes': 13.66, 'train_loss': 0.052, 'mAP_I': 0.30765820741195277, 'n_classes_I': 5, 'mAP_V': 0.23378792311581906, 'n_classes_V': 7, 'mAP_T': 0.17006729560004305, 'n_classes_T': 12, 'mAP_IVT': 0.1001729544697282, 'n_classes_IVT': 28, 'best_mAP_IVT': 0.10532396749227753}

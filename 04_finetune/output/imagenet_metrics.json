@@ -1,0 +1,17 @@
+{
+ "init": "imagenet",
+ "seed": 0,
+ "epochs_run": 4,
+ "epoch": 4,
+ "minutes": 11.29,
+ "train_loss": 0.0506,
+ "mAP_I": 0.43433085217960565,
+ "n_classes_I": 5,
+ "mAP_V": 0.35046807145682163,
+ "n_classes_V": 7,
+ "mAP_T": 0.19933928674792667,
+ "n_classes_T": 12,
+ "mAP_IVT": 0.14566819224453356,
+ "n_classes_IVT": 28,
+ "best_mAP_IVT": 0.14566819224453356
+}

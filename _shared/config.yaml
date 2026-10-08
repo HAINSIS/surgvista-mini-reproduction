@@ -1,0 +1,48 @@
+# One home for paths and hyperparameters. Every stage script reads this file.
+# Heavy artifacts (frames, checkpoints, teacher features) live under work_root (git-ignored).
+# Relative paths resolve against the current directory: run every script from the repo root.
+
+work_root: work
+
+data:
+  hf_dataset: Voxel51/cholect50          # CholecT50, FiftyOne export, 1 fps PNG frames
+  raw_dir: work/data/cholect50           # samples.json + data/<shard>/*.png
+  shards: ["005", "030", "055", "080"]   # each shard ~= 20 consecutive seconds of every video
+  cache: work/cache                      # frames.npy (uint8 N x H x W x 3), teacher feats
+  img_size: 112                          # paper: 224 (scaled down for GTX 1070)
+  # CholecT50 official cross-validation fold 1 test videos (Nwoye et al., 2022)
+  test_videos: [79, 2, 51, 6, 25, 14, 66, 23, 50, 111]
+
+model:                                   # paper: ViT-B encoder, here ViT-S
+  embed_dim: 384
+  depth: 12
+  heads: 6
+  patch: 16
+  tubelet: 2
+  num_frames: 16                         # paper: 16 frames
+  sampling_rate: 1                       # paper: 4 (our shards are only ~20 s long)
+
+pretrain:                                # values copied from official pretrain.sh unless noted
+  mask_ratio: 0.85
+  decoder_depth_video: 4
+  decoder_dim_video: 192                 # VideoMAE-S default
+  decoder_depth_image: 2
+  decoder_dim_image: 384                 # feat_decoder_embed_dim
+  image_teacher_loss_weight: 0.05
+  video_reconstruction_loss_weight: 1.0
+  teacher: endossl_vit_large_patch16     # surgery-specific expert (EndoSSL ViT-L), 1024-d
+  teacher_gdrive_id: 1bazW3W5Cglzfeeh_pdJALLktfxpateJ6
+  lr: 1.5e-4                             # official value, used as-is at batch 16 (paper: effective batch 512)
+  weight_decay: 0.05
+  betas: [0.9, 0.95]
+  batch_size: 16
+  epochs: 16                             # paper: 201 on 3.55M frames (sized to a ~13 min budget so cosine completes)
+  warmup_epochs: 2
+
+finetune:
+  epochs: 4                              # full cosine within ~7 min per arm
+  batch_size: 8
+  lr: 5.0e-4
+  weight_decay: 0.05
+  layer_decay: 0.75
+  drop_path: 0.1

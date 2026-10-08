@@ -1,0 +1,17 @@
+{
+ "init": "surgvista",
+ "seed": 0,
+ "epochs_run": 4,
+ "epoch": 4,
+ "minutes": 7.45,
+ "train_loss": 0.29,
+ "mAP_I": 0.28191514262205003,
+ "n_classes_I": 5,
+ "mAP_V": 0.21380630116471103,
+ "n_classes_V": 7,
+ "mAP_T": 0.14353038570920748,
+ "n_classes_T": 12,
+ "mAP_IVT": 0.0692350218980149,
+ "n_classes_IVT": 28,
+ "best_mAP_IVT": 0.07605713689591224
+}

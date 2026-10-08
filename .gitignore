@@ -1,0 +1,10 @@
+# heavy artifacts: frames, cached features, checkpoints
+work/
+*.pth
+*.npy
+*.mp4
+
+__pycache__/
+*.pyc
+.venv/
+venv/

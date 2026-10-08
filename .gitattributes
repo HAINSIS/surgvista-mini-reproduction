@@ -1,0 +1,2 @@
+# keep shell scripts runnable in WSL/Cygwin even when cloned with core.autocrlf=true
+*.sh text eol=lf

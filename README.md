@@ -99,25 +99,32 @@ Heavy files (frames, cached teacher features, checkpoints) go to `work/`, which 
 
 ## Run it
 
-Run all commands from the repo root. Tested with Python 3.11, torch 2.9.1+cu126, Windows, GTX 1070.
+Requires an NVIDIA GPU with CUDA (the scripts use `cuda`; 8 GB is enough) and about 5 GB of disk for data,
+caches and checkpoints. Run all commands from the repo root. Tested with Python 3.11, torch 2.9.1+cu126,
+Windows 10, GTX 1070.
 
 ```sh
 pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu126
 pip install -r requirements.txt
 ```
 
-**1. Data.** Download `samples.json` and the four shards into `work/data/cholect50/`:
+**1. Data.** Download `samples.json` (500 MB) and the four frame shards into `work/data/cholect50/`:
 
 ```sh
 hf download Voxel51/cholect50 --repo-type dataset --local-dir work/data/cholect50 \
-  --include "samples.json" "data/005/*" "data/030/*" "data/055/*" "data/080/*"
+  --include "samples.json" --include "data/005/*" --include "data/030/*" \
+  --include "data/055/*" --include "data/080/*"
 ```
+
+`02_data/frames_used.csv` pins the exact 3,901 frames of the reported run, so a rebuild uses the same data even
+if the shards hold a few more frames. Delete it to use every downloaded frame.
 
 **2. Teacher.** Download the EndoSSL ViT-L checkpoint released by the SurgVISTA authors (Google Drive id in
 `_shared/config.yaml`):
 
 ```sh
 pip install gdown
+mkdir -p work/ckpt
 gdown 1bazW3W5Cglzfeeh_pdJALLktfxpateJ6 -O work/ckpt/teacher_endossl_vitl.pth
 ```
 
@@ -139,7 +146,9 @@ python 05_demo/demo.py --init imagenet --video 111 --show    # or --mp4 any_lapa
 ```
 
 Notes: Pascal GPUs (sm_61) need cu126 wheels, because torch ≥ 2.8 cu128 dropped them. Pascal has no fast fp16, so
-everything trains in fp32.
+everything trains in fp32. GPU training is not bit-for-bit deterministic and the reported runs are a single seed,
+so expect a rerun to land near the reported numbers, not exactly on them. A rerun overwrites the committed files in
+`*/output/`; compare with `git diff` and restore with `git checkout -- .`.
 
 ## Data and licences
 

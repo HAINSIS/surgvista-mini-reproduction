@@ -3,6 +3,7 @@
   python 02_data/build_index.py
 
 Reads  : <raw_dir>/samples.json, <raw_dir>/data/<shard>/*.png   (download: see README)
+Pins   : 02_data/frames_used.csv = exact (video, frame) list of the reported run, if present
 Writes : <cache>/frames112.npy, <cache>/frames224.npy, <cache>/labels.npy
          02_data/output/index.csv, classes.json, data_summary.md
 """
@@ -51,6 +52,12 @@ for s in samples:
 classes = {k: sorted(v) for k, v in groups.items()}
 json.dump(classes, open(out / "classes.json", "w"), indent=1)
 df = pd.DataFrame(rows).sort_values(["video", "frame"]).reset_index(drop=True)
+# Pin the exact frames of the reported run (a subset of the four shards); delete the file to use every frame.
+pin = ROOT / "02_data" / "frames_used.csv"
+if pin.exists():
+    keep = pd.read_csv(pin)
+    df = df.merge(keep, on=["video", "frame"]).sort_values(["video", "frame"]).reset_index(drop=True)
+    print(f"pinned to frames_used.csv: {len(df)} of {len(keep)} listed frames found")
 test = set(cfg["data"]["test_videos"])
 df["split"] = np.where(df.video.isin(test), "test", "train")
 print(len(samples), "samples in dataset;", len(df), "frames on disk;", df.video.nunique(), "videos")

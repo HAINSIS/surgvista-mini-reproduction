@@ -101,7 +101,7 @@ for ep in range(epochs):
 
 torch.save(model.encoder.state_dict(), ck / f"{name}_encoder.pth")
 
-# reconstruction figure for the slides: masked input | reconstruction | original, 4 time slots
+# reconstruction figure: masked input | reconstruction | original, 4 time slots
 import matplotlib  # noqa: E402
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402

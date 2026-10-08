@@ -41,7 +41,7 @@ cache = Path(cfg["data"]["cache"]); ck = Path(cfg["work_root"]) / "ckpt"
 arms = [a for a in ARMS if (out / f"{a}_metrics.json").exists()]
 M = {a: json.load(open(out / f"{a}_metrics.json")) for a in arms}
 
-# ---------- Validation-Trinity extras ----------
+# ---------- latency and safety-critical recall ----------
 df = pd.read_csv(HERE.parent / "02_data" / "output" / "index.csv")
 classes = json.load(open(HERE.parent / "02_data" / "output" / "classes.json"))
 tri0 = len(classes["instruments"]) + len(classes["verbs"]) + len(classes["targets"])

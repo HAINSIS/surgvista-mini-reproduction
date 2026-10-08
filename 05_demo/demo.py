@@ -1,8 +1,9 @@
-"""05_demo: online triplet recognition on a surgical video with a live overlay.
+"""Online triplet recognition on a surgical video with a live overlay.
 
-  python demo.py --init surgvista --video 111 --show       # held-out CholecT50 test video (with ground truth)
-  python demo.py --init surgvista --mp4 path/to/clip.mp4    # any laparoscopic video, sampled at 1 fps
+  python 05_demo/demo.py --init imagenet --video 111 --show    # held-out CholecT50 test video (with ground truth)
+  python 05_demo/demo.py --init imagenet --mp4 path/to/clip.mp4 # any laparoscopic video, sampled at 1 fps
 
+Needs a fine-tuned checkpoint <work_root>/ckpt/ft_<init>.pth (04_finetune/finetune.py).
 Each prediction uses only the past 16 seconds (online, as in the operating room).
 Writes output/demo_<init>_<source>.mp4
 """

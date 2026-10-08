@@ -1,9 +1,11 @@
-"""03_pretrain step 2: self-supervised video pretraining on TRAIN videos only (no test leakage).
+"""Self-supervised video pretraining on TRAIN videos only (test videos are never seen).
 
-  python pretrain.py --variant surgvista   # pixel reconstruction + image-teacher distillation (the paper)
-  python pretrain.py --variant videomae    # pixel reconstruction only (ablation: what distillation adds)
+  python 03_pretrain/pretrain.py --variant surgvista                       # reconstruction + teacher distillation (the paper)
+  python 03_pretrain/pretrain.py --variant surgvista --init-from imagenet  # same, starting from ImageNet ViT-S
+  python 03_pretrain/pretrain.py --variant videomae                        # reconstruction only (optional ablation, not in reported results)
 
 Writes <work_root>/ckpt/<variant>_encoder.pth, output/<variant>_log.csv, output/<variant>_recon.png
+(--init-from imagenet saves under the name <variant>_in)
 """
 import argparse
 import math

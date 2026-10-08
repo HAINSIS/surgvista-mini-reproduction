@@ -1,4 +1,6 @@
-"""02_data: CholecT50 subset -> frame index, multi-hot labels, cached frame arrays.
+"""Build the CholecT50 subset: frame index, multi-hot labels, cached frame arrays.
+
+  python 02_data/build_index.py
 
 Reads  : <raw_dir>/samples.json, <raw_dir>/data/<shard>/*.png   (download: see README)
 Writes : <cache>/frames112.npy, <cache>/frames224.npy, <cache>/labels.npy

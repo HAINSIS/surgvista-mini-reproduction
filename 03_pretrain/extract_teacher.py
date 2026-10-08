@@ -1,7 +1,10 @@
-"""03_pretrain step 1: run the frozen surgical image expert once per frame and cache its features.
+"""Run the frozen surgical image expert once per frame and cache its features.
+
+  python 03_pretrain/extract_teacher.py
 
 SurgVISTA distills frame-level spatial features of EndoSSL ViT-L/16 (1024-d) into the video student.
-The teacher is frozen, so features are computed once (cheap on a GTX 1070) instead of every step.
+The teacher is frozen, so features are computed once instead of at every training step.
+Reads  <work_root>/ckpt/teacher_endossl_vitl.pth, <cache>/frames224.npy
 Writes <cache>/teacher_feats.npy : N x 49 x 1024 float16 (14x14 patch grid avg-pooled to 7x7,
 matching the 112 px / patch 16 student grid).
 """

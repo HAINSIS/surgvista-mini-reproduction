@@ -1,9 +1,12 @@
-"""04_finetune step 2: results table + charts + two 'Validation Trinity' extras (Henriques et al., MedIA 2026).
+"""Results table and charts from the fine-tuned checkpoints, plus two clinically motivated extras.
 
-  - Latency-Aware Accuracy: inference latency per online prediction (batch 1, GTX 1070) next to mAP.
-  - Safety-Critical Recall: recall on frames whose ground truth contains a triplet acting on a critical structure
-    (cystic artery, cystic duct, blood vessel) - the long-tail classes where a miss matters most.
-Writes output/results.md, output/results.png, output/curves.png, ../03_pretrain/output/pretrain_curves.png
+  python 04_finetune/summarize.py
+
+  - Latency: inference time per online prediction (16-frame clip, batch 1) next to mAP.
+  - Safety-critical recall (SCR@top5): recall on frames whose ground truth contains a triplet acting on a critical
+    structure (cystic artery, cystic duct, blood vessel), the long-tail classes where a miss matters most.
+Writes output/results.md, output/results.png, output/curves.png, output/linear_probe.png (after linear_probe.py),
+       ../03_pretrain/output/pretrain_curves.png
 """
 import json
 import sys

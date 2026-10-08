@@ -1,7 +1,8 @@
-"""04_finetune: end-to-end fine-tuning on CholecT50 triplet recognition (paper protocol: encoder + 1 FC head).
+"""End-to-end fine-tuning on CholecT50 triplet recognition (paper protocol: encoder + 1 FC head).
 
-  python finetune.py --init scratch|imagenet|videomae|surgvista [--minutes 6]
+  python 04_finetune/finetune.py --init scratch|imagenet|surgvista|surgvista_in [--minutes N]
 
+--init <name> other than scratch/imagenet loads <work_root>/ckpt/<name>_encoder.pth from 03_pretrain.
 Multi-label BCE over instruments(I) + verbs(V) + targets(T) + triplets(IVT); the label of a clip is the
 label of its last frame (online recognition). Metric: mAP over classes present in the test set, per group.
 Writes output/<init>_metrics.json, output/<init>_log.csv, <work_root>/ckpt/ft_<init>.pth

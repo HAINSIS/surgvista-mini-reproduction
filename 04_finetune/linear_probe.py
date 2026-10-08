@@ -1,8 +1,10 @@
-"""04_finetune step 3: linear probe on FROZEN features — measures representation quality without letting a 22 M-param
+"""Linear probe on FROZEN features: measures representation quality without letting a 22 M-param
 encoder memorise 40 training videos (which is what end-to-end fine-tuning does at this data scale).
 
-Encoders: scratch (random init), imagenet (inflated ViT-S), videomae-mini, surgvista-mini, plus the surgical IMAGE
-foundation model itself (EndoSSL ViT-L teacher, last frame of the clip; features already cached).
+  python 04_finetune/linear_probe.py
+
+Encoders: random init, ImageNet (inflated ViT-S), the 03_pretrain encoders whose checkpoint exists (surgvista,
+surgvista_in, videomae), plus the surgical IMAGE foundation model itself (EndoSSL ViT-L teacher, last frame of the clip; features already cached).
 Per class: standardised features -> logistic regression (class-balanced); mAP on the 10 held-out videos.
 Writes output/linear_probe.json, output/linear_probe.md
 """

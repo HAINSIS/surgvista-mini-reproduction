@@ -1,9 +1,9 @@
-# heavy artifacts: frames, cached features, checkpoints
+# heavy artifacts: frames, caches, checkpoints, venv, demo videos
 work/
 *.pth
+*.pt
 *.npy
 *.mp4
-
 __pycache__/
 *.pyc
 .venv/

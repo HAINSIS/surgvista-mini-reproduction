@@ -1,0 +1,16 @@
+{
+  "checkpoint": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/out_off_svc_mvd_long_amp/unified_base_st_SurgVISTA_SurgVISTA_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4/checkpoint-best/mp_rank_00_model_states.pt",
+  "source": "v111",
+  "split": "test",
+  "seconds": 2146,
+  "topk": 3,
+  "video_AP": {
+    "mAP_i": 84.75,
+    "mAP_v": 67.24,
+    "mAP_t": 58.57,
+    "mAP_iv": 44.31,
+    "mAP_it": 51.27,
+    "mAP_ivt": 47.02
+  },
+  "gt_in_topk_rate": 0.7934446505875077
+}

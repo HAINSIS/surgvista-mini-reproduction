@@ -1,11 +1,18 @@
-# torch / torchvision: install first from the matching CUDA index (see README), e.g.
+# torch / torchvision: install first from the matching CUDA index, e.g.
 #   pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu126
+# (_shared/setup_linux.sh does this with uv and reuses an existing CUDA PyTorch >= 2.1)
 timm==1.0.30
+einops==0.8.2
 numpy==2.4.6
+scipy==1.17.1
 pandas==3.0.6
 scikit-learn==1.9.1
 opencv-python==5.0.0.93
+pillow==12.3.0
 matplotlib==3.11.2
 PyYAML==6.0.3
 tqdm==4.70.1
-huggingface_hub==2.1.1
+safetensors==0.8.0
+urllib3==2.8.0
+# optional: the official script's DeepSpeed path (install with --no-deps; we used its mixed-precision path, USE_DS=0)
+# deepspeed==0.19.7

@@ -1,14 +1,16 @@
 # One home for paths and hyperparameters. Every stage script reads this file.
-# Heavy artifacts (frames, checkpoints, teacher features) live under work_root (git-ignored).
-# Relative paths resolve against the current directory: run every script from the repo root.
+# Heavy artifacts (venv, frames, checkpoints, teacher features) live OUTSIDE
+# PlayGround under work_root so the project folder stays light.
 
 work_root: work
+python: work/.venv/Scripts/python.exe
 
 data:
   hf_dataset: Voxel51/cholect50          # CholecT50, FiftyOne export, 1 fps PNG frames
-  raw_dir: work/data/cholect50           # samples.json + data/<shard>/*.png
+  hf_mirror: https://hf-mirror.com       # mirror of huggingface.co
+  raw_dir: work/data/cholect50      # samples.json + data/<shard>/*.png
   shards: ["005", "030", "055", "080"]   # each shard ~= 20 consecutive seconds of every video
-  cache: work/cache                      # frames.npy (uint8 N x H x W x 3), teacher feats
+  cache: work/cache                 # frames.npy (uint8 N x H x W x 3), teacher feats
   img_size: 112                          # paper: 224 (scaled down for GTX 1070)
   # CholecT50 official cross-validation fold 1 test videos (Nwoye et al., 2022)
   test_videos: [79, 2, 51, 6, 25, 14, 66, 23, 50, 111]
@@ -38,6 +40,71 @@ pretrain:                                # values copied from official pretrain.
   batch_size: 16
   epochs: 16                             # paper: 201 on 3.55M frames (sized to a ~13 min budget so cosine completes)
   warmup_epochs: 2
+
+# ---------------------------------------------------------------- phase 2 (full reproduction)
+# Values below = official isyangshu/SurgVISTA@00ae4bc (pretrain.sh, run_pretraining.py defaults,
+# generate_pkl_cholect50.py, resize_frame.py). Phase-1 scripts above keep using the blocks above.
+phase2:
+  split: cholect50-challenge
+  val_videos: [5, 18, 36, 65, 74]
+  test_videos: [92, 96, 103, 110, 111]
+  frame_hw: [320, 512]                   # official resize_frame.py: 512 x 320, PIL bilinear
+  pretrain_splits: [train]               # Setting-A stand-in: 40 CholecT50 train videos (~80k frames); paper A = Cholec80 1-40
+  pretrain:
+    model: base                          # ViT-B (official); "small" only for smoke tests on the GTX 1070
+    input_size: 224
+    teacher_input_size: 224
+    num_frames: 16
+    sampling_rate: 4
+    tubelet: 2
+    mask_ratio: 0.85
+    decoder_depth_video: 4
+    decoder_depth_image: 2
+    feat_decoder_embed_dim: 384
+    feat_decoder_num_heads: 6
+    distillation_target_dim: 1024
+    image_teacher_loss_weight: 0.05
+    video_reconstruction_loss_weight: 1.0
+    scales: [1.0, 0.875, 0.75, 0.66]     # GroupMultiScaleTwoResizedCrop, max_distort 1, 13 fixed offsets, no flip
+    batch_size: 64                       # per GPU
+    update_freq: 4                       # gradient accumulation
+    lr: 1.5e-4                           # x total_batch / 256 (as run_pretraining.py)
+    min_lr: 1.0e-4                       # x total_batch / 256
+    warmup_lr: 1.0e-6                    # x total_batch / 256
+    warmup_epochs: 40
+    epochs: 201
+    weight_decay: 0.05                   # weight_decay_end = same (constant)
+    betas: [0.9, 0.95]
+    opt_eps: 1.0e-8
+    drop_path: 0.1
+    clip_grad: null                      # official: no clipping
+    amp: true                            # official autocast fp16; set false on Pascal (GTX 1070)
+    save_ckpt_freq: 10
+    seed: 0
+    num_workers: 10
+  finetune:                              # official downstream/scripts/triplet/train_triplet_video.sh + run_triplet_training.py
+    num_frames: 16
+    sampling_rate: 4
+    input_size: 224
+    batch_size: 32                       # per GPU; official 32 x 2 GPUs = total 64
+    update_freq: 2                       # single GPU: 32 x 2 = 64
+    epochs: 20
+    warmup_epochs: 5
+    lr: 5.0e-4                           # x total_batch / 64 (as run_triplet_training.py)
+    min_lr: 1.0e-6
+    warmup_lr: 1.0e-6
+    weight_decay: 0.05
+    layer_decay: 0.75
+    betas: [0.9, 0.999]
+    opt_eps: 1.0e-8
+    drop_path: 0.1
+    fc_drop_rate: 0.5
+    aa: rand-m7-n4-mstd0.5-inc1
+    reprob: 0.25
+    crop_scale: [0.7, 1.0]
+    crop_ratio: [0.75, 1.3333]
+    amp: true                            # official deepspeed fp16; false on Pascal
+    num_workers: 8
 
 finetune:
   epochs: 4                              # full cosine within ~7 min per arm

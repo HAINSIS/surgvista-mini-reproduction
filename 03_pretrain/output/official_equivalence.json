@@ -1,0 +1,61 @@
+{
+  "official_commit": "00ae4bc641371f5b6e1efb899450bfb61f304100",
+  "device": "cuda",
+  "torch": "2.9.1+cu126",
+  "timm": "1.0.30",
+  "pos_embed": {
+    "dim384": 0.0,
+    "dim768": 0.0,
+    "dim1024": 0.0
+  },
+  "tube_mask": {
+    "official_masked": 1328,
+    "ours_masked": 1328,
+    "total": 1568
+  },
+  "student_small": {
+    "strict_load": "<All keys matched successfully>",
+    "params": 35614336,
+    "same_param_names": true,
+    "image_decoder_out": {
+      "max_abs": 0.0,
+      "rel_l2": 0.0
+    },
+    "video_decoder_out": {
+      "max_abs": 0.0,
+      "rel_l2": 0.0
+    }
+  },
+  "student_base": {
+    "strict_load": "<All keys matched successfully>",
+    "params": 100858624,
+    "same_param_names": true,
+    "image_decoder_out": {
+      "max_abs": 0.0,
+      "rel_l2": 0.0
+    },
+    "video_decoder_out": {
+      "max_abs": 0.0,
+      "rel_l2": 0.0
+    }
+  },
+  "teacher": {
+    "checkpoint": "D:\\npj-dm\\ckpt\\teacher_endossl_vitl.pth",
+    "inputs": "2 frames from data/005, centre square crop, 224 px, ImageNet norm",
+    "official_strict_load": "<All keys matched successfully>",
+    "ours_vs_official": {
+      "max_abs": 0.0,
+      "rel_l2": 0.0
+    },
+    "phase1_timm_vs_official": {
+      "max_abs": 1106.55057233572,
+      "rel_l2": 0.995336835743389
+    },
+    "phase1_timm_no_final_norm_eps1e-5_vs_official": {
+      "max_abs": 0.001800537109375,
+      "rel_l2": 1.140653966358189e-06
+    },
+    "official_feature_abs_max": 1105.7191162109375,
+    "official_feature_std": 35.293678283691406
+  }
+}

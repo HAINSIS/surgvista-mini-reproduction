@@ -1,0 +1,100 @@
+{
+  "root": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/CholecT50",
+  "videos": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    8,
+    10,
+    12,
+    13,
+    14,
+    15,
+    18,
+    22,
+    23,
+    25,
+    26,
+    27,
+    29,
+    31,
+    32,
+    35,
+    36,
+    40,
+    42,
+    43,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    56,
+    57,
+    60,
+    62,
+    65,
+    66,
+    68,
+    70,
+    73,
+    74,
+    75,
+    78,
+    79,
+    80,
+    92,
+    96,
+    103,
+    110,
+    111
+  ],
+  "frames": {
+    "linked": 95069,
+    "kept": 0,
+    "copied": 0,
+    "resized": 5794
+  },
+  "splits": {
+    "train": {
+      "official_samples": 73021,
+      "our_samples": 73021,
+      "only_official": 0,
+      "only_ours": 0,
+      "label_mismatch": 0,
+      "examples": {
+        "only_official": [],
+        "only_ours": [],
+        "label_mismatch": []
+      }
+    },
+    "val": {
+      "official_samples": 8966,
+      "our_samples": 8966,
+      "only_official": 0,
+      "only_ours": 0,
+      "label_mismatch": 0,
+      "examples": {
+        "only_official": [],
+        "only_ours": [],
+        "label_mismatch": []
+      }
+    },
+    "test": {
+      "official_samples": 7815,
+      "our_samples": 7815,
+      "only_official": 0,
+      "only_ours": 0,
+      "label_mismatch": 0,
+      "examples": {
+        "only_official": [],
+        "only_ours": [],
+        "label_mismatch": []
+      }
+    }
+  },
+  "identical": true
+}

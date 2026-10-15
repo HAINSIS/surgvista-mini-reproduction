@@ -1,0 +1,187 @@
+{
+  "a": "off_mvd_amp",
+  "b": "off_svc_mvd_long_amp",
+  "test_frames": 7815,
+  "replicates": 200,
+  "components": {
+    "ivt": {
+      "a": 32.07636104500068,
+      "b": 30.217081059421886,
+      "diff": -1.8592799855787945,
+      "diff_ci95": [
+        -3.002359191831401,
+        -0.6642758453241552
+      ],
+      "share_b_better": 0.0
+    },
+    "i": {
+      "a": 77.84486389878973,
+      "b": 80.8785842173259,
+      "diff": 3.0337203185361687,
+      "diff_ci95": [
+        0.6633415011636222,
+        4.425794465938798
+      ],
+      "share_b_better": 1.0
+    },
+    "v": {
+      "a": 49.92528936546055,
+      "b": 49.62162451213434,
+      "diff": -0.30366485332621096,
+      "diff_ci95": [
+        -2.254112915165663,
+        0.853898803122893
+      ],
+      "share_b_better": 0.465
+    },
+    "t": {
+      "a": 42.741628320618055,
+      "b": 42.4435886021423,
+      "diff": -0.2980397184757564,
+      "diff_ci95": [
+        -1.7939781603947893,
+        1.3605377503850198
+      ],
+      "share_b_better": 0.34
+    },
+    "iv": {
+      "a": 31.537972475532467,
+      "b": 32.46918578879021,
+      "diff": 0.9312133132577465,
+      "diff_ci95": [
+        -0.4008555313028537,
+        1.9244803523326823
+      ],
+      "share_b_better": 0.965
+    },
+    "it": {
+      "a": 36.29590345023997,
+      "b": 34.23796904547381,
+      "diff": -2.057934404766158,
+      "diff_ci95": [
+        -3.1987135006186755,
+        -0.8474470328840077
+      ],
+      "share_b_better": 0.005
+    }
+  },
+  "classes_b_better": 15,
+  "classes_compared": 39,
+  "largest_gains": [
+    {
+      "triplet": "scissors,cut,cystic_artery",
+      "test_frames": 44,
+      "a": 39.97849783061222,
+      "b": 66.76469890530254,
+      "diff": 26.786201074690315
+    },
+    {
+      "triplet": "bipolar,coagulate,abdominal_wall_cavity",
+      "test_frames": 60,
+      "a": 61.9692069572175,
+      "b": 73.98391122060961,
+      "diff": 12.014704263392106
+    },
+    {
+      "triplet": "clipper,clip,cystic_artery",
+      "test_frames": 96,
+      "a": 61.83220940436873,
+      "b": 73.1895717292313,
+      "diff": 11.357362324862574
+    },
+    {
+      "triplet": "clipper,clip,cystic_duct",
+      "test_frames": 161,
+      "a": 74.17418462936324,
+      "b": 83.24439888219898,
+      "diff": 9.07021425283574
+    },
+    {
+      "triplet": "bipolar,dissect,cystic_artery",
+      "test_frames": 82,
+      "a": 26.480929612733235,
+      "b": 30.599007775194053,
+      "diff": 4.11807816246082
+    },
+    {
+      "triplet": "hook,dissect,cystic_duct",
+      "test_frames": 884,
+      "a": 55.05524156778565,
+      "b": 58.78532518347279,
+      "diff": 3.730083615687141
+    },
+    {
+      "triplet": "grasper,retract,liver",
+      "test_frames": 1085,
+      "a": 69.27280420087921,
+      "b": 71.52113598102513,
+      "diff": 2.248331780145918
+    },
+    {
+      "triplet": "hook,cut,peritoneum",
+      "test_frames": 92,
+      "a": 8.899968746255192,
+      "b": 9.78602819935603,
+      "diff": 0.886059453100839
+    }
+  ],
+  "largest_losses": [
+    {
+      "triplet": "bipolar,dissect,cystic_duct",
+      "test_frames": 37,
+      "a": 50.450076082189064,
+      "b": 17.15677944253729,
+      "diff": -33.29329663965178
+    },
+    {
+      "triplet": "bipolar,dissect,gallbladder",
+      "test_frames": 5,
+      "a": 81.33333333333334,
+      "b": 64.50757575757575,
+      "diff": -16.825757575757592
+    },
+    {
+      "triplet": "bipolar,coagulate,peritoneum",
+      "test_frames": 12,
+      "a": 57.394900643470436,
+      "b": 46.50985547486299,
+      "diff": -10.88504516860745
+    },
+    {
+      "triplet": "bipolar,coagulate,blood_vessel",
+      "test_frames": 74,
+      "a": 65.00001762094541,
+      "b": 54.11656204419132,
+      "diff": -10.883455576754098
+    },
+    {
+      "triplet": "grasper,retract,gut",
+      "test_frames": 13,
+      "a": 18.147145284055817,
+      "b": 8.15687635447554,
+      "diff": -9.990268929580276
+    },
+    {
+      "triplet": "hook,dissect,cystic_artery",
+      "test_frames": 239,
+      "a": 31.407153328303828,
+      "b": 22.736821198969896,
+      "diff": -8.670332129333932
+    },
+    {
+      "triplet": "grasper,grasp,cystic_duct",
+      "test_frames": 174,
+      "a": 22.937238513669854,
+      "b": 15.562933923941625,
+      "diff": -7.374304589728228
+    },
+    {
+      "triplet": "grasper,pack,gallbladder",
+      "test_frames": 96,
+      "a": 45.686655202375626,
+      "b": 38.54572443844777,
+      "diff": -7.140930763927855
+    }
+  ],
+  "note": "paired block bootstrap over test frames; test-frame uncertainty only (no seed or video variance)"
+}

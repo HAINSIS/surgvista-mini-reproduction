@@ -21,7 +21,28 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def load_cfg():
-    return yaml.safe_load(open(ROOT / "_shared" / "config.yaml", encoding="utf8"))
+    """config.yaml, with every path under its `work_root` relocated to $NPJ_WORK_ROOT when that is set
+    (e.g. NPJ_WORK_ROOT=/data/npj-dm on the Linux machine); `python` follows the platform's venv layout."""
+    import os
+    cfg = yaml.safe_load(open(ROOT / "_shared" / "config.yaml", encoding="utf8"))
+    new = os.environ.get("NPJ_WORK_ROOT")
+    if not new and not Path(cfg["work_root"]).is_absolute():  # relative work_root (e.g. "work"): next to the project
+        new = str((ROOT / cfg["work_root"]).resolve())
+    if not new and not Path(cfg["work_root"]).exists() and (ROOT.parent / "npj-dm").is_dir():
+        new = str((ROOT.parent / "npj-dm").resolve())  # bundle layout: work folder next to the project
+    if new:
+        old = cfg["work_root"]
+
+        def fix(o):
+            if isinstance(o, dict):
+                return {k: fix(v) for k, v in o.items()}
+            if isinstance(o, list):
+                return [fix(v) for v in o]
+            return new + o[len(old):] if isinstance(o, str) and o.startswith(old) else o
+        cfg = fix(cfg)
+        if os.name != "nt":
+            cfg["python"] = new + "/.venv/bin/python"
+    return cfg
 
 
 def sincos_table(n_pos, dim):

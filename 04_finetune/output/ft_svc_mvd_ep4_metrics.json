@@ -1,0 +1,116 @@
+{
+  "name": "svc_mvd_ep4",
+  "best_val_epoch": 8,
+  "val_at_best": {
+    "mAP_i": 83.08296875617117,
+    "mAP_v": 65.60688426381111,
+    "mAP_t": 52.11572788897206,
+    "mAP_iv": 46.786871356365445,
+    "mAP_it": 44.0369192802881,
+    "mAP_ivt": 42.95620878362064
+  },
+  "test": {
+    "mAP_i": 77.51286824012266,
+    "mAP_v": 47.86933315147154,
+    "mAP_t": 38.426376658793274,
+    "mAP_iv": 31.158202614837222,
+    "mAP_it": 34.85597184234692,
+    "mAP_ivt": 29.82390612078707
+  },
+  "test_ci95": {
+    "ivt": [
+      28.59590124452791,
+      31.66017923559793
+    ],
+    "i": [
+      75.0339745365125,
+      81.088392802532
+    ],
+    "v": [
+      45.71860701935103,
+      51.03894814141296
+    ],
+    "t": [
+      36.53136314967575,
+      40.19704853568921
+    ]
+  },
+  "meta": {
+    "args": {
+      "name": "svc_mvd_ep4",
+      "init": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/ckpt/p2_svc_mvd/checkpoint-3.pth",
+      "pos": "auto",
+      "batch_size": 4,
+      "update_freq": 16,
+      "epochs": 20,
+      "warmup_epochs": 5,
+      "train_stride": 1,
+      "val_stride": 1,
+      "workers": 12,
+      "no_amp": false,
+      "seed": 0,
+      "max_steps": 0
+    },
+    "pos": "3d",
+    "init_report": {
+      "format": "official",
+      "loaded": 158,
+      "missing": [
+        "fc_norm.bias",
+        "fc_norm.weight",
+        "head.bias",
+        "head.weight"
+      ],
+      "shape_mismatch": []
+    },
+    "finetune_cfg": {
+      "num_frames": 16,
+      "sampling_rate": 4,
+      "input_size": 224,
+      "batch_size": 32,
+      "update_freq": 2,
+      "epochs": 20,
+      "warmup_epochs": 5,
+      "lr": 0.0005,
+      "min_lr": 1e-06,
+      "warmup_lr": 1e-06,
+      "weight_decay": 0.05,
+      "layer_decay": 0.75,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "opt_eps": 1e-08,
+      "drop_path": 0.1,
+      "fc_drop_rate": 0.5,
+      "aa": "rand-m7-n4-mstd0.5-inc1",
+      "reprob": 0.25,
+      "crop_scale": [
+        0.7,
+        1.0
+      ],
+      "crop_ratio": [
+        0.75,
+        1.3333
+      ],
+      "amp": true,
+      "num_workers": 8
+    },
+    "train_clips": 80304,
+    "val_clips": 10185,
+    "test_clips": 10374,
+    "total_batch": 64,
+    "iters_per_epoch": 1254,
+    "lr": 0.0005,
+    "min_lr": 1e-06,
+    "amp": true,
+    "deviations": {
+      "train_stride": 1,
+      "val_stride": 1,
+      "epochs": 20,
+      "frame_source": "512x320 cache (official: original PNGs)"
+    },
+    "gpu": "NVIDIA GeForce RTX 4090 D",
+    "torch": "2.6.0+cu124"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "checkpoint": "D:\\npj-dm\\ckpt\\teacher_endossl_vitl.pth",
+  "inputs": "2 frames from data/005, centre square crop, 224 px, ImageNet norm",
+  "official_strict_load": "<All keys matched successfully>",
+  "ours_vs_official": {
+    "max_abs": 0.0,
+    "rel_l2": 0.0
+  },
+  "phase1_timm_vs_official": {
+    "max_abs": 1106.55057233572,
+    "rel_l2": 0.995336835743389
+  },
+  "phase1_timm_no_final_norm_eps1e-5_vs_official": {
+    "max_abs": 0.001800537109375,
+    "rel_l2": 1.140653966358189e-06
+  },
+  "official_feature_abs_max": 1105.7191162109375,
+  "official_feature_std": 35.293678283691406
+}

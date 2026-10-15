@@ -1,0 +1,19 @@
+{
+  "checkpoint": "mvd_k400_cholect50_finetuned.pt",
+  "source": "v111",
+  "device": "NVIDIA GeForce GTX 1070",
+  "amp": false,
+  "speed": 0.0,
+  "seconds": 2146,
+  "latency_ms": {
+    "mean": 142.15,
+    "p95": 144.31,
+    "max": 999.85
+  },
+  "model_ms_mean": 137.97,
+  "preprocess_ms_mean": 4.18,
+  "deadline_ms": 1000,
+  "deadline_misses": 0,
+  "effective_rate_fps": 6.22,
+  "top1_agreement_with_offline": 1.0
+}

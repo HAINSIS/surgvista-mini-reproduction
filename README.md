@@ -18,8 +18,8 @@ authors' own script, unchanged.
 
 | Model | AP_IVT (95% CI) | AP_I | AP_V | AP_T | AP_IV | AP_IT |
 |---|---|---|---|---|---|---|
-| MVD-K400 | 32.1 (30.7 to 33.4) | 77.8 | 49.9 | 42.7 | 31.5 | 36.3 |
-| MVD-K400 + SurgVISTA pretraining (30 epochs) | 30.2 (28.8 to 31.6) | 80.9 | 49.6 | 42.4 | 32.5 | 34.2 |
+| MVD-K400 | 32.1 (31.1 to 33.6) | 77.8 | 49.9 | 42.7 | 31.5 | 36.3 |
+| MVD-K400 + SurgVISTA pretraining (30 epochs) | 30.2 (29.3 to 31.7) | 80.9 | 49.6 | 42.4 | 32.5 | 34.2 |
 | *Paper: MVD-K400* | *35.3* | | | | | |
 | *Paper: SurgVISTA (3.55 M frames)* | *41.1 (38.0 to 44.1)* | | | | | |
 
@@ -27,15 +27,15 @@ Paired comparison on the same test frames (`04_finetune/output/compare_off_mvd_a
 
 | Metric | Difference (SurgVISTA 30 ep minus MVD) | 95% CI |
 |---|---|---|
-| AP_IVT | -1.86 | -3.00 to -0.66 |
-| AP_I | +3.03 | +0.66 to +4.43 |
-| AP_V | -0.30 | -2.25 to +0.85 |
-| AP_T | -0.30 | -1.79 to +1.36 |
-| AP_IV | +0.93 | -0.40 to +1.92 |
-| AP_IT | -2.06 | -3.20 to -0.85 |
+| AP_IVT | -1.86 | -2.86 to -0.83 |
+| AP_I | +3.03 | +1.02 to +5.07 |
+| AP_V | -0.30 | -1.84 to +0.82 |
+| AP_T | -0.30 | -1.66 to +0.92 |
+| AP_IV | +0.93 | -0.09 to +1.67 |
+| AP_IT | -2.06 | -3.06 to -1.07 |
 
 Confidence intervals: Bayesian block bootstrap over test frames (200 resamples, an Exp(1) weight per one-minute
-block within each test video, the official metric recomputed, Efron bias-corrected percentile). The comparison
+block of real time, i.e. (video, frame number ÷ 60), the official metric recomputed, Efron bias-corrected percentile). The comparison
 gives both runs the same weights in every resample. The per-frame predictions of both models are in
 `04_finetune/output/ft_off_*_test_preds.npz`, so every number can be recomputed.
 
@@ -74,12 +74,35 @@ USE_DS=0 bash _shared/run_official_ft.sh
 
 # paired comparison + second-by-second demo on test video 111
 bash _shared/deliver.sh
+
+# live streaming on any video or camera, with per-frame latency (frames read one at a time, past 60 s only)
+python 05_demo/stream_demo.py --ckpt surgvista30_cholect50_finetuned.pt --mp4 your_video.mp4 --show
+
+# mixed-precision overflow record of both fine-tunes, from the training log
+python 04_finetune/overflow_report.py
 ```
 
 How the official fine-tuning script runs unchanged: `04_finetune/official_ft_prepare.py` lays the data out in the
 official format and runs the official label builder; `04_finetune/official_ft_launch.py` lists every compatibility
 shim for current libraries (none touches model, data, optimiser or metric); `04_finetune/official_ft_collect.py`
 re-scores the official predictions and writes results only if they equal the script's own numbers.
+
+## Final weights, real-time running and training health
+
+| Weights (345,276,750 bytes each, fp32) | SHA-256 |
+|---|---|
+| `mvd_k400_cholect50_finetuned.pt` | `91338838e0dbc1f8e4886b50210157fe8b43ef6d6d97f830a5870226e28591fc` |
+| `surgvista30_cholect50_finetuned.pt` | `8be65a9f024a7117102a343e344cfb7d94179b59df9c405aaee332c7c4b9413b` |
+
+The weight files are too large for GitHub and are shared separately. [MODEL_CARD.md](MODEL_CARD.md) describes the
+input processing, the modules and the failure cases seen on the test video.
+
+- **Streaming** (`05_demo/stream_demo.py`): on all 2,146 s of test video 111, on a GTX 1070 laptop GPU (batch 1,
+  fp32), 140 to 142 ms from frame arrival to prediction on average, 0 of 2,146 predictions later than the next
+  frame; the streamed predictions equal the offline demo's. Records: `05_demo/output/stream_*`.
+- **Mixed precision** (`04_finetune/output/overflow_report.md`): the scaler skipped 3 of 22,800 optimizer steps (MVD)
+  and 4 of 22,800 (SurgVISTA), all in epochs 15 to 19; no non-finite loss; the evaluated checkpoints (epochs 4 and 7)
+  predate every skipped step.
 
 ## Repository layout
 
@@ -89,7 +112,7 @@ _shared/       model (surgvista.py), fine-tuning encoder (encoders.py), official
 02_data/       CholecT50 download and index (official split and class order)
 03_pretrain/   equivalence check against the official code, SurgVISTA pretraining
 04_finetune/   official-script fine-tuning (prepare, launch, collect), our own fine-tune, comparison; results in output/
-05_demo/       second-by-second demo; per-second predictions and timelines in output/
+05_demo/       second-by-second demo, streaming demo with latency; per-second predictions and timelines in output/
 logs/          full logs of the pretraining and both official fine-tunes
 docs/          demo screenshot
 ```

@@ -3,7 +3,7 @@
 Both runs must have been scored on the same frames (official frame set, same order): ft_<a>_test_preds.npz and
 ft_<b>_test_preds.npz in output/. The difference b - a is bootstrapped PAIRED: in every replicate both runs get the
 same random block weights (Bayesian block bootstrap, Exp(1) weight per one-minute block of 60 frames within each test
-video, as triplet_metrics.bootstrap_ci), so frame-level noise shared by both runs cancels. Reported: point difference,
+video by frame number, i.e. real time, as triplet_metrics.bootstrap_ci), so frame-level noise shared by both runs cancels. Reported: point difference,
 95% bias-corrected percentile CI of the difference, share of replicates with b > a, and the triplet classes that
 changed most. This captures test-frame uncertainty only, not seed variance or variation across test videos.
 
@@ -30,15 +30,6 @@ def load(name):
     return d["predictions"], d["labels"], d["video"], d["frame"]
 
 
-def blocks(videos, block=60):
-    pos = np.zeros(len(videos), int)
-    for v in dict.fromkeys(videos.tolist()):
-        m = videos == v
-        pos[m] = np.arange(m.sum())
-    _, bid = np.unique(np.stack([videos.astype(str), (pos // block).astype(str)], 1), axis=0, return_inverse=True)
-    return bid.ravel()
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--a", required=True, help="reference run, e.g. off_mvd_amp")
@@ -53,7 +44,7 @@ def main():
 
     ra, rb = tm.official_map(pa, ya, va), tm.official_map(pb, yb, vb)
     point = {c: rb[f"mAP_{c}"] - ra[f"mAP_{c}"] for c in COMPS}
-    bid = blocks(va)
+    bid = tm.time_blocks(va, fa)  # one-minute blocks by frame number (real time), not by sample position
     rng = np.random.default_rng(0)
     diffs = {c: [] for c in COMPS}
     for _ in range(a.n):

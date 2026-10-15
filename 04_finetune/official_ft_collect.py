@@ -56,7 +56,7 @@ def main():
     official = {f"mAP_{c}": float(final[f"Final mAP-{c}"]) for c in COMPS}
     gap = max(abs(test[k] - official[k]) for k in test)  # percentage points; float rounding only (numpy vs torch
     assert gap < 1e-3, f"our re-score differs from the official script's Final numbers by {gap}"  # sigmoid ~1e-5)
-    ci = tm.bootstrap_ci(p, y, v)
+    ci = tm.bootstrap_ci(p, y, v, frames=f)
     best = ep.loc[ep["val_mAP"].idxmax()]
     meta = {"code": "official run_triplet_training.py via 04_finetune/official_ft_launch.py",
             "run_dir": str(run), "test_frames": int(len(y)),

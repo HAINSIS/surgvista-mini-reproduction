@@ -19,8 +19,8 @@ Official CholecT50 challenge split (test videos 92, 96, 103, 110, 111), official
 |---|---|---|---|---|---|---|---|---|
 | mvd | 30.3 (29.0–32.1) | 80.5 | 48.4 | 40.6 | 30.6 | 33.4 | 13 | 1 |
 | mvd_png | 28.6 (26.9–30.8) | 81.2 | 49.8 | 40.0 | 30.8 | 31.9 | 7 | 1 |
-| off_mvd_amp | 32.1 (30.7–33.4) | 77.8 | 49.9 | 42.7 | 31.5 | 36.3 | 3 | 1 (official code) |
-| off_svc_mvd_long_amp | 30.2 (28.8–31.6) | 80.9 | 49.6 | 42.4 | 32.5 | 34.2 | 6 | 1 (official code) |
+| off_mvd_amp | 32.1 (31.1–33.6) | 77.8 | 49.9 | 42.7 | 31.5 | 36.3 | 3 | 1 (official code) |
+| off_svc_mvd_long_amp | 30.2 (29.3–31.7) | 80.9 | 49.6 | 42.4 | 32.5 | 34.2 | 6 | 1 (official code) |
 | svc_mvd_ep4 | 29.8 (28.6–31.7) | 77.5 | 47.9 | 38.4 | 31.2 | 34.9 | 8 | 1 |
 
 Paper reference values (ViT-B, full data, full recipe): MVD-K400 (paper Table 12) = 35.3; SurgVISTA, 3.55M frames (paper Table 12) = 41.1; VideoMAE-K400 (paper Table 12) = 33.5

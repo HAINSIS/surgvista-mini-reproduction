@@ -1,0 +1,384 @@
+{
+ "off_mvd_amp": {
+  "epochs": 20,
+  "optimizer_steps": 22800,
+  "skipped_steps": 3,
+  "skipped_share": 0.00013157894736842105,
+  "initial_scale": 65536.0,
+  "final_scale": 16777216.0,
+  "nonfinite_loss_lines": 0,
+  "per_epoch": {
+   "0": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 65536.0,
+    "scale_max": 65536.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "1": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 65536.0,
+    "scale_max": 131072.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "2": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 131072.0,
+    "scale_max": 131072.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "3": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 131072.0,
+    "scale_max": 262144.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "4": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 262144.0,
+    "scale_max": 262144.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "5": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 262144.0,
+    "scale_max": 524288.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "6": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 524288.0,
+    "scale_max": 524288.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "7": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 524288.0,
+    "scale_max": 1048576.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "8": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 1048576.0,
+    "scale_max": 2097152.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "9": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 2097152.0,
+    "scale_max": 2097152.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "10": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 2097152.0,
+    "scale_max": 4194304.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "11": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 4194304.0,
+    "scale_max": 4194304.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "12": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 4194304.0,
+    "scale_max": 8388608.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "13": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 8388608.0,
+    "scale_max": 8388608.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "14": {
+    "halvings": 1,
+    "doublings": 1,
+    "scale_min": 8388608.0,
+    "scale_max": 16777216.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "15": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 8388608.0,
+    "scale_max": 8388608.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "16": {
+    "halvings": 1,
+    "doublings": 1,
+    "scale_min": 8388608.0,
+    "scale_max": 16777216.0,
+    "lines": 1827,
+    "inf_norm_lines": 32,
+    "nonfinite_loss_lines": 0
+   },
+   "17": {
+    "halvings": 1,
+    "doublings": 1,
+    "scale_min": 8388608.0,
+    "scale_max": 16777216.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "18": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 8388608.0,
+    "scale_max": 8388608.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "19": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 8388608.0,
+    "scale_max": 16777216.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   }
+  }
+ },
+ "off_svc_mvd_long_amp": {
+  "epochs": 20,
+  "optimizer_steps": 22800,
+  "skipped_steps": 4,
+  "skipped_share": 0.00017543859649122806,
+  "initial_scale": 65536.0,
+  "final_scale": 4194304.0,
+  "nonfinite_loss_lines": 0,
+  "per_epoch": {
+   "0": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 65536.0,
+    "scale_max": 65536.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "1": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 65536.0,
+    "scale_max": 131072.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "2": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 131072.0,
+    "scale_max": 131072.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "3": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 131072.0,
+    "scale_max": 262144.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "4": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 262144.0,
+    "scale_max": 262144.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "5": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 262144.0,
+    "scale_max": 524288.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "6": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 524288.0,
+    "scale_max": 524288.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "7": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 524288.0,
+    "scale_max": 1048576.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "8": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 1048576.0,
+    "scale_max": 2097152.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "9": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 2097152.0,
+    "scale_max": 2097152.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "10": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 2097152.0,
+    "scale_max": 4194304.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "11": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 4194304.0,
+    "scale_max": 4194304.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "12": {
+    "halvings": 0,
+    "doublings": 1,
+    "scale_min": 4194304.0,
+    "scale_max": 8388608.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "13": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 8388608.0,
+    "scale_max": 8388608.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "14": {
+    "halvings": 1,
+    "doublings": 1,
+    "scale_min": 8388608.0,
+    "scale_max": 16777216.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "15": {
+    "halvings": 1,
+    "doublings": 1,
+    "scale_min": 8388608.0,
+    "scale_max": 16777216.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "16": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 8388608.0,
+    "scale_max": 8388608.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "17": {
+    "halvings": 1,
+    "doublings": 1,
+    "scale_min": 8388608.0,
+    "scale_max": 16777216.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   },
+   "18": {
+    "halvings": 1,
+    "doublings": 0,
+    "scale_min": 4194304.0,
+    "scale_max": 8388608.0,
+    "lines": 1827,
+    "inf_norm_lines": 32,
+    "nonfinite_loss_lines": 0
+   },
+   "19": {
+    "halvings": 0,
+    "doublings": 0,
+    "scale_min": 4194304.0,
+    "scale_max": 4194304.0,
+    "lines": 1827,
+    "inf_norm_lines": 0,
+    "nonfinite_loss_lines": 0
+   }
+  }
+ }
+}

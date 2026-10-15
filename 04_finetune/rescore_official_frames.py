@@ -30,7 +30,7 @@ def rescore(npz):
     keep = y.sum(1) > 0
     allf = tm.official_map(p, y, v)
     lab = tm.official_map(p[keep], y[keep], v[keep])
-    ci = tm.bootstrap_ci(p[keep], y[keep], v[keep])
+    ci = tm.bootstrap_ci(p[keep], y[keep], v[keep], frames=d["frame"][keep])
     return {"frames": int(len(y)), "labelled_frames": int(keep.sum()),
             "all_frames": {c: allf[f"mAP_{c}"] for c in COMPS},
             "labelled_only": {c: lab[f"mAP_{c}"] for c in COMPS}, "labelled_only_ci95": ci}

@@ -1,0 +1,19 @@
+{
+  "checkpoint": "surgvista30_cholect50_finetuned.pt",
+  "source": "v111",
+  "device": "NVIDIA GeForce GTX 1070",
+  "amp": false,
+  "speed": 0.0,
+  "seconds": 2146,
+  "latency_ms": {
+    "mean": 139.92,
+    "p95": 143.61,
+    "max": 200.22
+  },
+  "model_ms_mean": 136.12,
+  "preprocess_ms_mean": 3.81,
+  "deadline_ms": 1000,
+  "deadline_misses": 0,
+  "effective_rate_fps": 6.68,
+  "top1_agreement_with_offline": 0.9991
+}

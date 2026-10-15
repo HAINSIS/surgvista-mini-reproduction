@@ -23,6 +23,30 @@
   "rescore_max_abs_diff": 1.744991750030067e-05,
   "test_ci95": {
     "ivt": [
+      31.086273794516117,
+      33.64936636834781
+    ],
+    "i": [
+      76.30101861097899,
+      80.21643259117508
+    ],
+    "v": [
+      47.90167602797598,
+      52.2229048871699
+    ],
+    "t": [
+      41.17398857544879,
+      45.0814527024797
+    ]
+  },
+  "meta": {
+    "code": "official run_triplet_training.py via 04_finetune/official_ft_launch.py",
+    "run_dir": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/out_off_mvd_amp/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4",
+    "test_frames": 7815,
+    "hyperparameters": "Namespace(batch_size=4, epochs=20, update_freq=16, save_ckpt_freq=10, model='unified_base_st', pretrained_data='k400', pretrained_method='mvd', input_size=224, fc_drop_rate=0.5, drop=0.0, attn_drop_rate=0.0, drop_path=0.1, disable_eval_during_finetuning=False, opt='adamw', opt_eps=1e-08, opt_betas=(0.9, 0.999), clip_grad=None, momentum=0.9, weight_decay=0.05, weight_decay_end=None, lr=0.0005, layer_decay=0.75, warmup_lr=1e-06, min_lr=1e-06, warmup_epochs=5, warmup_steps=-1, color_jitter=0.4, aa='rand-m7-n4-mstd0.5-inc1', train_interpolation='bicubic', crop_pct=None, short_side_size=224, long_side_size=224, reprob=0.25, remode='pixel', recount=1, resplit=False, finetune='', model_key='model|module', model_prefix='', data_path='/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/CholecT50', eval_data_path='/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/CholecT50', nb_classes=100, imagenet_default_mean_and_std=True, data_strategy='online', output_mode='key_frame', num_frames=16, sampling_rate=4, data_set='CholecT50', data_fps='1fps', output_dir='/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/out_off_mvd_amp/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4', log_dir='/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/out_off_mvd_amp/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4/log', device='cuda', seed=0, resume='', auto_resume=False, save_ckpt=True, start_epoch=0, eval=False, qkv_bias=True, qkv_divided_bias=False, qkv_divided=False, dist_eval=True, num_workers=12, pin_mem=True, world_size=1, local_rank=-1, dist_on_itp=False, dist_url='env://', enable_deepspeed=False, rank=0, gpu=0, distributed=True, dist_backend='nccl')VisionTransformer("
+  },
+  "test_ci95_by_sample_position": {
+    "ivt": [
       30.65529004684883,
       33.42667216594361
     ],
@@ -39,10 +63,5 @@
       44.56795119916471
     ]
   },
-  "meta": {
-    "code": "official run_triplet_training.py via 04_finetune/official_ft_launch.py",
-    "run_dir": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/out_off_mvd_amp/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4",
-    "test_frames": 7815,
-    "hyperparameters": "Namespace(batch_size=4, epochs=20, update_freq=16, save_ckpt_freq=10, model='unified_base_st', pretrained_data='k400', pretrained_method='mvd', input_size=224, fc_drop_rate=0.5, drop=0.0, attn_drop_rate=0.0, drop_path=0.1, disable_eval_during_finetuning=False, opt='adamw', opt_eps=1e-08, opt_betas=(0.9, 0.999), clip_grad=None, momentum=0.9, weight_decay=0.05, weight_decay_end=None, lr=0.0005, layer_decay=0.75, warmup_lr=1e-06, min_lr=1e-06, warmup_epochs=5, warmup_steps=-1, color_jitter=0.4, aa='rand-m7-n4-mstd0.5-inc1', train_interpolation='bicubic', crop_pct=None, short_side_size=224, long_side_size=224, reprob=0.25, remode='pixel', recount=1, resplit=False, finetune='', model_key='model|module', model_prefix='', data_path='/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/CholecT50', eval_data_path='/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/CholecT50', nb_classes=100, imagenet_default_mean_and_std=True, data_strategy='online', output_mode='key_frame', num_frames=16, sampling_rate=4, data_set='CholecT50', data_fps='1fps', output_dir='/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/out_off_mvd_amp/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4', log_dir='/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/out_off_mvd_amp/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4/log', device='cuda', seed=0, resume='', auto_resume=False, save_ckpt=True, start_epoch=0, eval=False, qkv_bias=True, qkv_divided_bias=False, qkv_divided=False, dist_eval=True, num_workers=12, pin_mem=True, world_size=1, local_rank=-1, dist_on_itp=False, dist_url='env://', enable_deepspeed=False, rank=0, gpu=0, distributed=True, dist_backend='nccl')VisionTransformer("
-  }
+  "ci_method": "Bayesian block bootstrap, 200 resamples, Exp(1) weight per one-minute block of real time (video, frame_number // 60), Efron bias-corrected percentile; test-frame uncertainty only"
 }

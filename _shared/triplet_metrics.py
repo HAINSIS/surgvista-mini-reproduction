@@ -93,26 +93,37 @@ def weighted_map(logits, labels, videos, weights, comps=("ivt", "i", "v", "t")):
     return out
 
 
-def bootstrap_ci(logits, labels, videos, n=200, seed=0, comps=("ivt", "i", "v", "t"), block=60):
+def time_blocks(videos, frames=None, block=60):
+    """Block id per frame: (video, frame_number // block). With 1-fps frame numbers a block is one real minute of
+    video, also when frames were filtered out (frames without a triplet are not scored, so the kept frames have
+    time gaps). Without frame numbers (old callers) blocks fall back to `block` consecutive kept frames."""
+    videos = np.asarray(videos)
+    if frames is None:
+        t = np.zeros(len(videos), int)
+        for v in dict.fromkeys(videos.tolist()):
+            m = videos == v
+            t[m] = np.arange(m.sum())
+    else:
+        t = np.asarray(frames).astype(int)
+    _, bid = np.unique(np.stack([videos.astype(str), (t // block).astype(str)], 1), axis=0, return_inverse=True)
+    return bid.ravel()
+
+
+def bootstrap_ci(logits, labels, videos, n=200, seed=0, comps=("ivt", "i", "v", "t"), block=60, frames=None):
     """95% CI: Bayesian bootstrap (Rubin 1981; every frame gets a random Exp(1) weight, so no frame or rare class
     is ever dropped) + Efron's bias-corrected (BC) percentile interval.
     Why BC: AP is a ratio in which a rare positive's own weight enters both numerator and denominator, so
     resampled APs are biased upward when positives are few (a plain resample-with-replacement bootstrap gave
     11.7-13.4 around a point estimate of 11.4 on the MVD probe). BC shifts the percentiles by
     z0 = Phi^-1(share of replicates below the point estimate). Weights are drawn per BLOCK of `block`
-    consecutive frames (60 = one minute = one clip's span) because neighbouring 1-fps frames are nearly
+    seconds of video (60 = one minute = one clip's span; by frame number when `frames` is given, 2026-10-15) because neighbouring 1-fps frames are nearly
     duplicates; per-frame weights gave intervals ~3x too narrow. Frames must be in temporal order within each
     video. The video set is fixed (5 test videos).
     The paper does not state its CI method."""
     from scipy.stats import norm
     rng = np.random.default_rng(seed)
     videos = np.asarray(videos)
-    pos = np.zeros(len(videos), int)
-    for v in dict.fromkeys(videos.tolist()):
-        m = videos == v
-        pos[m] = np.arange(m.sum())
-    _, block_id = np.unique(np.stack([videos.astype(str), (pos // block).astype(str)], 1), axis=0, return_inverse=True)
-    block_id = block_id.ravel()
+    block_id = time_blocks(videos, frames, block)  # pass `frames` (1-fps frame numbers): blocks = real minutes
     point = weighted_map(logits, labels, videos, np.ones(len(videos)), comps)
     samples = {c: [] for c in comps}
     for _ in range(n):

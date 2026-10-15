@@ -302,7 +302,7 @@ def main():
     tl, tr_rows = predict(model, te, dev, amp)
     res, order = score(te, tl, tr_rows)
     tl, tr_rows = tl[order], tr_rows[order]
-    ci = tm.bootstrap_ci(tl, te.labels[tr_rows], te.videos[tr_rows])
+    ci = tm.bootstrap_ci(tl, te.labels[tr_rows], te.videos[tr_rows], frames=te.frames[tr_rows])
     metrics = {"name": a.name, "best_val_epoch": s["epoch"], "val_at_best": {k: v for k, v in s["val"].items() if k.startswith("mAP")},
                "test": {k: v for k, v in res.items() if k.startswith("mAP")}, "test_ci95": ci, "meta": meta}
     (out / f"ft_{a.name}_metrics.json").write_text(json.dumps(metrics, indent=2))

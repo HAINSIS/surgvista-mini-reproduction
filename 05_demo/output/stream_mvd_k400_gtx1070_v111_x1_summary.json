@@ -1,0 +1,29 @@
+{
+  "checkpoint": "mvd_k400_cholect50_finetuned.pt",
+  "source": "v111",
+  "device": "NVIDIA GeForce GTX 1070",
+  "amp": false,
+  "frames_per_second_fed": 1.0,
+  "display": true,
+  "frames": 300,
+  "end_to_end_ms": {
+    "mean": 152.9,
+    "p95": 174.22,
+    "max": 405.27
+  },
+  "stages_ms_mean": {
+    "queue_wait_ms": 0.77,
+    "decode_ms": 9.88,
+    "preprocess_ms": 4.7,
+    "model_ms": 133.6,
+    "draw_display_ms": 3.94
+  },
+  "backlog": {
+    "max_frames_waiting": 0,
+    "end_to_end_first_third_mean_ms": 155.95,
+    "end_to_end_last_third_mean_ms": 152.96
+  },
+  "frame_period_ms": 1000.0,
+  "frames_later_than_next_arrival": 0,
+  "keeps_up": true
+}

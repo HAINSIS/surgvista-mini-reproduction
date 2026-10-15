@@ -1,0 +1,29 @@
+{
+  "checkpoint": "surgvista30_cholect50_finetuned.pt",
+  "source": "v111",
+  "device": "NVIDIA GeForce GTX 1070",
+  "amp": false,
+  "frames_per_second_fed": 1.0,
+  "display": true,
+  "frames": 300,
+  "end_to_end_ms": {
+    "mean": 190.99,
+    "p95": 227.76,
+    "max": 1861.37
+  },
+  "stages_ms_mean": {
+    "queue_wait_ms": 4.13,
+    "decode_ms": 12.11,
+    "preprocess_ms": 16.39,
+    "model_ms": 153.09,
+    "draw_display_ms": 5.27
+  },
+  "backlog": {
+    "max_frames_waiting": 0,
+    "end_to_end_first_third_mean_ms": 208.81,
+    "end_to_end_last_third_mean_ms": 187.25
+  },
+  "frame_period_ms": 1000.0,
+  "frames_later_than_next_arrival": 2,
+  "keeps_up": false
+}

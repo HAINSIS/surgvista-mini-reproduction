@@ -19,9 +19,9 @@ python 05_demo/stream_demo.py --ckpt surgvista30_cholect50_finetuned.pt --mp4 yo
 python 05_demo/demo_official.py --ckpt surgvista30_cholect50_finetuned.pt --mp4 your_video.mp4 --name surgvista30
 ```
 
-Needs the repository code and its requirements; a GPU is optional (CPU works, slower). Measured per-frame latency
-with these weights, batch 1, fp32: see `05_demo/output/stream_*_summary.json` (GTX 1070 laptop GPU: about 137 ms,
-so a 1-frame-per-second feed is processed with time to spare).
+Needs the repository code and its requirements; a GPU is optional (CPU works, slower). End-to-end latency (frame
+arrival to overlay on screen), batch 1, fp32, GTX 1070 laptop GPU: about 153 ms (MVD) and 191 ms (SurgVISTA) per
+frame at one frame per second; see `05_demo/output/stream_*_summary.json`.
 
 ## Input processing (identical to the official CholecT50 test loader)
 

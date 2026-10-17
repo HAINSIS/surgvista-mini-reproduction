@@ -5,7 +5,7 @@ instead of the official 20 (the official schedule overfits; README, "Fine-tuning
 
 | File | Start weights | Test AP_IVT (95% CI) | SHA-256 |
 |---|---|---|---|
-| `mvd_k400_cholect50_5ep.pt` | MVD-K400, 5-epoch fine-tune | 34.9 (33.4 to 36.3) | added with the weight file |
+| `hainsis_triplet_vitb_5ep.pt` | MVD-K400, 5-epoch fine-tune | 34.9 (33.4 to 36.3) | `e13540aea70edcc1a370ad3d58ffd1572af5cef104e117b256bdc06337c69eac` |
 | `mvd_k400_cholect50_finetuned.pt` | MVD-K400 | 32.1 (31.1 to 33.6) | `91338838e0dbc1f8e4886b50210157fe8b43ef6d6d97f830a5870226e28591fc` |
 | `surgvista30_cholect50_finetuned.pt` | MVD-K400 + 30 epochs SurgVISTA pretraining | 30.2 (29.3 to 31.7) | `8be65a9f024a7117102a343e344cfb7d94179b59df9c405aaee332c7c4b9413b` |
 
@@ -16,9 +16,9 @@ parameters. Check after download: `sha256sum *.pt` (Linux) or `certutil -hashfil
 
 ```bash
 # live: frames are read one at a time; each second is predicted from the past 60 s only; latency is measured
-python 05_demo/stream_demo.py --ckpt mvd_k400_cholect50_5ep.pt --mp4 your_video.mp4 --show
+python 05_demo/stream_demo.py --ckpt hainsis_triplet_vitb_5ep.pt --mp4 your_video.mp4 --show
 # offline: per-second CSV, timeline figure and annotated video
-python 05_demo/demo_official.py --ckpt mvd_k400_cholect50_5ep.pt --mp4 your_video.mp4 --name mvd_5ep
+python 05_demo/demo_official.py --ckpt hainsis_triplet_vitb_5ep.pt --mp4 your_video.mp4 --name hainsis_5ep
 ```
 
 Needs the repository code and its requirements; a GPU is optional (CPU works, slower). End-to-end latency (frame

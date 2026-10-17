@@ -100,7 +100,7 @@ TEST_ARM=s_all5 bash _shared/run_screen.sh
 bash _shared/deliver.sh
 
 # live streaming on any video or camera, with per-frame latency (frames read one at a time, past 60 s only)
-python 05_demo/stream_demo.py --ckpt mvd_k400_cholect50_5ep.pt --mp4 your_video.mp4 --show
+python 05_demo/stream_demo.py --ckpt hainsis_triplet_vitb_5ep.pt --mp4 your_video.mp4 --show
 
 # mixed-precision overflow record of both fine-tunes, from the training log
 python 04_finetune/overflow_report.py
@@ -115,7 +115,7 @@ re-scores the official predictions and writes results only if they equal the scr
 
 | Weights (345,276,750 bytes each, fp32) | SHA-256 |
 |---|---|
-| `mvd_k400_cholect50_5ep.pt` (5-epoch fine-tune, test 34.9) | added with the weight file |
+| `hainsis_triplet_vitb_5ep.pt` (5-epoch fine-tune, test 34.9) | `e13540aea70edcc1a370ad3d58ffd1572af5cef104e117b256bdc06337c69eac` |
 | `mvd_k400_cholect50_finetuned.pt` | `91338838e0dbc1f8e4886b50210157fe8b43ef6d6d97f830a5870226e28591fc` |
 | `surgvista30_cholect50_finetuned.pt` | `8be65a9f024a7117102a343e344cfb7d94179b59df9c405aaee332c7c4b9413b` |
 

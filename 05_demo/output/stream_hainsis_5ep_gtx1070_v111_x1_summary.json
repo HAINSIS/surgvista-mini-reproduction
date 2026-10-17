@@ -1,0 +1,30 @@
+{
+  "checkpoint": "hainsis_triplet_vitb_5ep.pt",
+  "source": "v111",
+  "device": "NVIDIA GeForce GTX 1070",
+  "amp": false,
+  "frames_per_second_fed": 1.0,
+  "display": true,
+  "frames": 300,
+  "end_to_end_ms": {
+    "mean": 146.64,
+    "p95": 156.27,
+    "max": 625.13
+  },
+  "stages_ms_mean": {
+    "queue_wait_ms": 0.75,
+    "decode_ms": 8.3,
+    "preprocess_ms": 3.8,
+    "model_ms": 127.42,
+    "draw_display_ms": 6.37
+  },
+  "backlog": {
+    "max_frames_waiting": 0,
+    "end_to_end_first_third_mean_ms": 150.0,
+    "end_to_end_last_third_mean_ms": 145.22
+  },
+  "frame_period_ms": 1000.0,
+  "frames_later_than_next_arrival": 0,
+  "keeps_up": true,
+  "top1_agreement_with_offline": 1.0
+}

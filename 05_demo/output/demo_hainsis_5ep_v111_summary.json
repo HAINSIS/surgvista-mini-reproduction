@@ -1,0 +1,16 @@
+{
+  "checkpoint": "work/weights_final/hainsis_triplet_vitb_5ep.pt",
+  "source": "v111",
+  "split": "test",
+  "seconds": 2146,
+  "topk": 3,
+  "video_AP": {
+    "mAP_i": 85.62,
+    "mAP_v": 67.68,
+    "mAP_t": 54.6,
+    "mAP_iv": 43.96,
+    "mAP_it": 51.9,
+    "mAP_ivt": 48.85
+  },
+  "gt_in_topk_rate": 0.8150896722325294
+}

@@ -84,17 +84,17 @@ def producer(a, q, t0):
             return
         if a.video:
             get, n, _, _ = D.frames_cholect50(a.video)
-            n = n if not a.max_seconds else min(n, a.max_seconds)
+            n = n if not a.max_seconds else min(n, a.start + a.max_seconds)
             src = ("png", get, n)
         else:
             cap = cv2.VideoCapture(str(a.mp4))
             fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
             n = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) / fps)
-            n = n if not a.max_seconds else min(n, a.max_seconds)
+            n = n if not a.max_seconds else min(n, a.start + a.max_seconds)
             src = ("mp4", cap, fps)
         i = 0
-        for s in range(n):
-            t_cap = t0 + s / a.speed if a.speed else time.perf_counter()
+        for s in range(a.start, n):
+            t_cap = t0 + (s - a.start) / a.speed if a.speed else time.perf_counter()
             wait = t_cap - time.perf_counter()
             if wait > 0:
                 time.sleep(wait)
@@ -127,6 +127,7 @@ def main():
     ap.add_argument("--amp", action="store_true", help="fp16 autocast, as the official evaluation (CUDA only)")
     ap.add_argument("--show", action="store_true", help="live window; its drawing and display are timed")
     ap.add_argument("--max-seconds", type=int, default=0)
+    ap.add_argument("--start", type=int, default=0, help="start at this second of a file or CholecT50 video")
     ap.add_argument("--compare", help="offline demo timeline CSV of the same video: report top-1 agreement")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     a = ap.parse_args()
@@ -144,6 +145,7 @@ def main():
             model(torch.zeros(1, 3, T, SIZE, SIZE, device=dev))
         sync()
 
+    gt = D.frames_cholect50(a.video)[2] if a.video else None  # labels, shown in green (not used by the model)
     q = queue.Queue()
     t0 = time.perf_counter() + 0.5
     threading.Thread(target=producer, args=(a, q, t0), daemon=True).start()
@@ -177,6 +179,9 @@ def main():
         for j, c in enumerate(top, 1):
             cv2.putText(canvas, f"{p[c]:.2f}  {D.TRIP[c]}", (10, 25 + 25 * j), cv2.FONT_HERSHEY_SIMPLEX, 0.55,
                         (255, 255, 255), 1)
+        if gt is not None:
+            truth = "; ".join(D.TRIP[c] for c in np.flatnonzero(gt[s])) or "no instrument in view"
+            cv2.putText(canvas, "truth: " + truth[:80], (10, 470), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (80, 220, 80), 1)
         if a.show:
             cv2.imshow("stream", canvas)
             quit_ = cv2.waitKey(1) & 0xFF == 27

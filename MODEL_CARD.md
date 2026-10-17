@@ -22,7 +22,7 @@ python 05_demo/demo_official.py --ckpt hainsis_triplet_vitb_5ep.pt --mp4 your_vi
 ```
 
 Needs the repository code and its requirements; a GPU is optional (CPU works, slower). End-to-end latency (frame
-arrival to overlay on screen), batch 1, fp32, GTX 1070 laptop GPU: about 153 ms (MVD) and 191 ms (SurgVISTA) per
+arrival to overlay on screen), batch 1, fp32, GTX 1070 laptop GPU: about 147 ms (5-epoch model), 153 ms (MVD, 20 epochs) and 191 ms (SurgVISTA) per
 frame at one frame per second; see `05_demo/output/stream_*_summary.json`.
 
 ## Input processing (identical to the official CholecT50 test loader)

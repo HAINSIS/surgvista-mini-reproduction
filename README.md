@@ -125,7 +125,7 @@ input processing, the modules and the failure cases seen on the test video.
 - **Streaming** (`05_demo/stream_demo.py`): a producer thread delivers frames on schedule (cameras: newest frame
   only, 1-frame driver buffer); each frame is timed from arrival to the overlay on screen, with queue wait and
   backlog. Real-time replay of test video 111 at 1 frame per second with the live window, GTX 1070 laptop GPU
-  (batch 1, fp32), 300 s: end-to-end mean 153 ms (MVD) and 191 ms (SurgVISTA). An overload test at 8 frames per
+  (batch 1, fp32), 300 s: end-to-end mean 147 ms (5-epoch model; 95th percentile 156 ms), 153 ms (MVD, official 20 epochs) and 191 ms (SurgVISTA). An overload test at 8 frames per
   second shows the backlog growing. The streamed predictions equal the offline demo's. Records:
   `05_demo/output/stream_*`. Real camera capture to display is not yet validated.
 - **Mixed precision** (`04_finetune/output/overflow_report.md`): the scaler skipped 3 of 22,800 optimizer steps (MVD)

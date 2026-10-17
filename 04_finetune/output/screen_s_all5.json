@@ -1,0 +1,80 @@
+{
+  "name": "s_all5",
+  "args": "",
+  "split_scored": "VALIDATION (screen root: test pickle = val)",
+  "data": {
+    "src": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/CholecT50",
+    "thin": 1,
+    "train_samples": 73021,
+    "train_samples_full": 73021,
+    "val_samples": 8966,
+    "val_videos": [
+      "VID05",
+      "VID18",
+      "VID36",
+      "VID65",
+      "VID74"
+    ],
+    "test_pickle": "copy of val (screening never loads test videos)",
+    "test_videos_excluded": [
+      "VID103",
+      "VID110",
+      "VID111",
+      "VID92",
+      "VID96"
+    ]
+  },
+  "epochs": 5,
+  "val_ivt_per_epoch": [
+    28.3115068021704,
+    40.50067996415291,
+    44.610696198207236,
+    45.76874685497142,
+    46.10493685501173
+  ],
+  "val_loss_per_epoch": [
+    0.031098618396839507,
+    0.027959729028686243,
+    0.026843231570437328,
+    0.028277658650952324,
+    0.028588015425080132
+  ],
+  "train_loss_per_epoch": [
+    0.09209242355136667,
+    0.029149834757053964,
+    0.02090023617043028,
+    0.01644957547646858,
+    0.014337903832431931
+  ],
+  "best_epoch": 4,
+  "best_val_ivt": 46.10493685501173,
+  "mean_val_ivt_last3": 45.49479330273012,
+  "mean_val_ivt_last5": 41.05931333490274,
+  "val_full_eval": {
+    "best_epoch": {
+      "mAP_i": 83.02655419667082,
+      "mAP_v": 64.4388820946615,
+      "mAP_t": 53.12759052868634,
+      "mAP_iv": 47.726640656652094,
+      "mAP_it": 47.38315989422229,
+      "mAP_ivt": 46.10493685501173
+    },
+    "avg_last2": {
+      "mAP_i": 82.4551393707118,
+      "mAP_v": 63.83886906772223,
+      "mAP_t": 53.29608496469377,
+      "mAP_iv": 47.70019365637126,
+      "mAP_it": 47.34851378389834,
+      "mAP_ivt": 46.051645775578656
+    },
+    "avg_last3": {
+      "mAP_i": 82.53214673716825,
+      "mAP_v": 64.05430233735612,
+      "mAP_t": 53.52290640783295,
+      "mAP_iv": 48.096883361313,
+      "mAP_it": 47.205340258231104,
+      "mAP_ivt": 45.91901860789531
+    }
+  },
+  "run_dir": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/screen_out/s_all5/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4"
+}

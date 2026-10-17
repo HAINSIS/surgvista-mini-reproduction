@@ -1,0 +1,57 @@
+{
+  "name": "scr_s_base",
+  "best_val_epoch": 8,
+  "val_at_best": {
+    "mAP_ivt": 43.888182106136675
+  },
+  "test": {
+    "mAP_i": 76.39118433304898,
+    "mAP_v": 49.22973918267235,
+    "mAP_t": 43.25838003266702,
+    "mAP_iv": 30.695475838927983,
+    "mAP_it": 34.486722992043134,
+    "mAP_ivt": 30.176175925839555
+  },
+  "test_official_script": {
+    "mAP_i": 76.39118433304898,
+    "mAP_v": 49.22976720581699,
+    "mAP_t": 43.25840158893213,
+    "mAP_iv": 30.695475838927983,
+    "mAP_it": 34.486722992043134,
+    "mAP_ivt": 30.176175925839555
+  },
+  "rescore_max_abs_diff": 2.8023144643896103e-05,
+  "test_ci95": {
+    "ivt": [
+      29.035062045507956,
+      31.367805856319382
+    ],
+    "i": [
+      74.72713413617721,
+      79.20952246044621
+    ],
+    "v": [
+      47.26659032675288,
+      51.43915032691673
+    ],
+    "t": [
+      41.33078350325757,
+      45.429214324906084
+    ]
+  },
+  "meta": {
+    "code": "official run_triplet_training.py via 04_finetune/official_ft_launch.py",
+    "run_dir": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/screen_test/s_base/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4",
+    "test_frames": 7815,
+    "hyperparameters": null,
+    "deviations": {
+      "recipe": "regularisation screen arm s_base",
+      "epochs": 10,
+      "warmup_epochs": 2,
+      "train_clips": "every 4th training sample",
+      "arm_args": "none (official values)",
+      "checkpoint": "best-val epoch of the screen run, scored once with the official --eval"
+    },
+    "screen_run_dir": "/home/allstar/Desktop/PlayGround/npj_bundle/npj-dm/official_ft/screen_out/s_base/unified_base_st_k400_mvd_CholecT50_0.0005_0.75_online_key_frame_frame16_Fixed_Stride_4"
+  }
+}

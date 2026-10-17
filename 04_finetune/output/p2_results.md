@@ -11,7 +11,6 @@ Official CholecT50 challenge split (test videos 92, 96, 103, 110, 111), official
 | svc_mvd_ep2 | 8.9 (8.1–10.0) | 30.7 | 18.9 | 19.2 | 17.1 |
 | svc_mvd_ep4 | 9.9 (9.0–10.8) | 33.7 | 21.9 | 20.0 | 17.4 |
 | vmc_mvd_ep4 | 9.9 (9.0–10.8) | 34.1 | 21.9 | 19.1 | 18.5 |
-| EndoSSL ViT-L teacher, frame-level (imagenet_norm (official SurgVISTA)) | 22.5 | 71.9 | 46.4 | 31.5 | 42.8 |
 
 ## Fine-tuning (official recipe; budget deviations in each run's meta)
 
@@ -21,6 +20,11 @@ Official CholecT50 challenge split (test videos 92, 96, 103, 110, 111), official
 | mvd_png | 28.6 (26.9–30.8) | 81.2 | 49.8 | 40.0 | 30.8 | 31.9 | 7 | 1 |
 | off_mvd_amp | 32.1 (31.1–33.6) | 77.8 | 49.9 | 42.7 | 31.5 | 36.3 | 3 | 1 (official code) |
 | off_svc_mvd_long_amp | 30.2 (29.3–31.7) | 80.9 | 49.6 | 42.4 | 32.5 | 34.2 | 6 | 1 (official code) |
+| scr_s_all5 | 34.9 (33.4–36.3) | 85.5 | 54.0 | 44.6 | 34.8 | 37.1 | 4 | 1 (official code) |
+| scr_s_base | 30.2 (29.0–31.4) | 76.4 | 49.2 | 43.3 | 30.7 | 34.5 | 8 | 1 (official code) |
+| scr_s_stride2 | 34.8 (33.8–36.1) | 85.4 | 53.7 | 45.1 | 35.8 | 40.1 | 6 | 1 (official code) |
+| scr_s_stride2_s1 | 32.7 (31.8–34.3) | 79.7 | 51.4 | 44.2 | 32.9 | 37.2 | 6 | 1 (official code) |
+| scr_s_stride2_s2 | 31.4 (30.3–32.9) | 79.8 | 51.3 | 43.9 | 32.1 | 34.2 | 7 | 1 (official code) |
 | svc_mvd_ep4 | 29.8 (28.6–31.7) | 77.5 | 47.9 | 38.4 | 31.2 | 34.9 | 8 | 1 |
 
 Paper reference values (ViT-B, full data, full recipe): MVD-K400 (paper Table 12) = 35.3; SurgVISTA, 3.55M frames (paper Table 12) = 41.1; VideoMAE-K400 (paper Table 12) = 33.5

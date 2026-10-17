@@ -9,6 +9,7 @@ Writes output/p2_results.md, output/p2_results.json, output/p2_scaling_curve_<st
 import argparse
 import json
 import re
+import statistics
 from pathlib import Path
 
 import matplotlib
@@ -28,7 +29,10 @@ RUN_LABELS = {"mvd": "MVD-K400 → fine-tune", "svc_mvd_ep4": "MVD-K400 + SurgVI
               "vmk400": "VideoMAE-K400 → fine-tune",
               "mvd_png": "MVD → fine-tune, original frames", "svc_mvd_long_png": "MVD + long SurgVISTA → fine-tune, original frames",
               "off_mvd": "MVD → official fine-tune code", "off_svc_mvd_long": "MVD + long SurgVISTA → official fine-tune code",
-              "off_mvd_amp": "MVD → official code (AMP)", "off_svc_mvd_long_amp": "MVD + long SurgVISTA → official code (AMP)"}
+              "off_mvd_amp": "MVD → official code (AMP)", "off_svc_mvd_long_amp": "MVD + long SurgVISTA → official code (AMP)",
+              "scr_s_base": "MVD → official code, 10 ep, every 4th clip", "scr_s_stride2": "MVD → official code, 10 ep, every 2nd clip",
+              "scr_s_stride2_s1": "same, seed 1", "scr_s_stride2_s2": "same, seed 2",
+              "scr_s_all5": "MVD → official code, 5 ep, every clip"}
 
 
 def load(p):
@@ -172,6 +176,13 @@ GUIDE_ROWS = [  # (label, kind, key); kind: probe | ft | teacher
     ("MVD fine-tuned on the original 854x480 frames (calibration check 2)", "ft", "mvd_png"),
     ("MVD fine-tuned with the OFFICIAL fine-tuning code (mixed precision; calibration 3)", "ft", "off_mvd_amp"),
     ("MVD + long SurgVISTA pretraining (80k clips x 30 epochs), fine-tuned with the OFFICIAL code", "ft", "off_svc_mvd_long_amp"),
+    ("MVD, OFFICIAL code, screen recipe: 10 epochs, every 4th training clip (test viewed: 1st recipe)", "ft", "scr_s_base"),
+    ("MVD, OFFICIAL code, screen recipe: 10 epochs, every 2nd training clip (val winner then; test viewed: 2nd recipe)", "ft", "scr_s_stride2"),
+    ("Same recipe (every 2nd clip), seed 1: seed repeat of the declared-final recipe", "ft", "scr_s_stride2_s1"),
+    ("Same recipe (every 2nd clip), seed 2: seed repeat of the declared-final recipe", "ft", "scr_s_stride2_s2"),
+    ("Every-2nd-clip recipe, mean ± SD over seeds 0/1/2", "mean", ("scr_s_stride2", "scr_s_stride2_s1", "scr_s_stride2_s2")),
+    ("MVD, OFFICIAL code, 5 epochs (1 warm-up), every training clip (new val winner, 46.1; test viewed: 3rd recipe)",
+     "ft", "scr_s_all5"),
     ("MVD fine-tuned, seed 1", "ft", "mvd_s1"),
     ("MVD + SurgVISTA pretraining, fine-tuned, seed 1", "ft", "svc_mvd_ep4_s1"),
 ]
@@ -189,6 +200,13 @@ def update_guide(probes, fts, teacher):
             "fine-tune rows were measured on the RTX 4090 D; the teacher row on the GTX 1070 laptop (same code and data).", "",
             "| What | Test AP_IVT | Source file |", "|---|---|---|"]
     for label, kind, key in GUIDE_ROWS:
+        if kind == "mean":
+            v = [fts[k]["test"]["mAP_ivt"] for k in key if k in fts]
+            src = ", ".join(f"ft_{k}_metrics.json" for k in key)
+            cell = (f"**{statistics.mean(v):.1f} ± {statistics.stdev(v):.1f}** (n = {len(v)}; val "
+                    + " / ".join(f"{fts[k]['val_at_best']['mAP_ivt']:.2f}" for k in key) + ")") if len(v) == len(key) else "pending"
+            rows.append(f"| {label} | {cell} | `{src}` |")
+            continue
         if kind == "teacher":
             r = teacher and next(iter(teacher["results"].values()))
             src = "03_pretrain/output/teacher_probe_fulltest.json"

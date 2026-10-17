@@ -7,6 +7,8 @@ Re-scores the test predictions with our copy of the official metric (must equal 
 adds the bootstrap 95% CI, and writes 04_finetune/output/ft_<name>_{metrics.json, log.csv, test_preds.npz}.
 
     python 04_finetune/official_ft_collect.py --name off_mvd --base <work_root>/official_ft/out_mvd
+Evaluation-only run of a screen arm (official --eval of its best-val checkpoint, run_screen.sh TEST_ARM=...): the run
+has no epoch rows, so the training curve and best epoch come from the arm's screen summary (--screen-json).
 """
 import argparse
 import json
@@ -40,6 +42,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--name", required=True)
     ap.add_argument("--base", required=True, help="the --output_dir given to the official script")
+    ap.add_argument("--screen-json", help="eval-only run of a screen arm: its screen_<arm>.json (curve, best epoch)")
     a = ap.parse_args()
     runs = [p.parent for p in Path(a.base).glob("*/log.txt")]
     assert len(runs) == 1, f"expected one run folder under {a.base}, found {runs}"
@@ -47,7 +50,12 @@ def main():
     rows = [json.loads(l) for l in open(run / "log.txt") if l.strip()]
     final = next((r for r in rows if "Final mAP-ivt" in r), None)
     assert final is not None, f"{run}/log.txt has no Final line: the run has not finished its test"
-    ep = pd.DataFrame([r for r in rows if "epoch" in r])
+    scr = json.load(open(a.screen_json)) if a.screen_json else None
+    if scr:
+        ep = pd.DataFrame({"epoch": range(scr["epochs"]), "train_loss": scr["train_loss_per_epoch"],
+                           "val_loss": scr["val_loss_per_epoch"], "val_mAP": scr["val_ivt_per_epoch"]})
+    else:
+        ep = pd.DataFrame([r for r in rows if "epoch" in r])
     ep.to_csv(HERE / "output" / f"ft_{a.name}_log.csv", index=False)
 
     p, y, v, f = read_preds(run / "0.txt")
@@ -62,6 +70,13 @@ def main():
             "run_dir": str(run), "test_frames": int(len(y)),
             "hyperparameters": (run / "hyerparamter.txt").read_text().splitlines()[0][:2000]
             if (run / "hyerparamter.txt").exists() else None}
+    if scr:
+        d = scr.get("data") or {}
+        meta["deviations"] = {"recipe": "regularisation screen arm " + scr["name"], "epochs": scr["epochs"],
+                              "warmup_epochs": 2, "train_clips": f"every {d.get('thin', '?')}th training sample",
+                              "arm_args": scr["args"] or "none (official values)",
+                              "checkpoint": "best-val epoch of the screen run, scored once with the official --eval"}
+        meta["screen_run_dir"] = scr["run_dir"]
     metrics = {"name": a.name, "best_val_epoch": int(best["epoch"]), "val_at_best": {"mAP_ivt": float(best["val_mAP"])},
                "test": test, "test_official_script": official, "rescore_max_abs_diff": gap, "test_ci95": ci,
                "meta": meta}

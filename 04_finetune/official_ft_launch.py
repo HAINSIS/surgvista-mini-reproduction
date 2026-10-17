@@ -31,6 +31,9 @@ every shim is listed, none touches the model, data, optimiser, schedule or metri
      the gradient is the mean over the 64 clips, as theirs. See patch_deepspeed().
   8. torch >= 2.6 loads checkpoints with weights_only=True by default; the official final test loads its own
      DeepSpeed best checkpoint (numpy scalars inside) as torch < 2.6 did -> default restored to weights_only=False.
+  9. Seed repeats: the script seeds torch/numpy with --seed but builds its DistributedSampler without a seed, so the
+     training order is identical for every --seed (sampler default 0). When --seed is given, the sampler's default seed
+     follows it, so a seed repeat also reshuffles the data. --seed 0 (the default of every earlier run) is unchanged.
 Launch through torchrun (the final test wraps the model in DistributedDataParallel), from a folder that holds
 pretrain_params/ (the script reads start weights from that relative path):
     cd <run dir> && torchrun --nproc_per_node=1 <this file> <official args...>
@@ -134,6 +137,7 @@ def setup():
 
     if "--enable_deepspeed" in sys.argv:
         patch_deepspeed()
+    patch_sampler_seed(sys.argv)
 
     if os.environ.get("NPJ_OFFICIAL_NODIST") == "1":  # smoke tests on Windows only (no NCCL): no torchrun
         import torch
@@ -165,6 +169,21 @@ def setup():
             import torch
             torch.save({"model": model_without_ddp.state_dict()}, d / "mp_rank_00_model_states.pt")
     U.save_model = save_model
+
+
+def patch_sampler_seed(argv):
+    """9. in the header: the sampler's default seed follows --seed (no change when --seed is absent or 0)."""
+    seed = next((int(argv[i + 1]) for i, a in enumerate(argv[:-1]) if a == "--seed"), 0)
+    if not seed:
+        return
+    import torch.utils.data as tud
+    orig_init = tud.DistributedSampler.__init__
+
+    def init(self, *a, **k):
+        k.setdefault("seed", seed)
+        orig_init(self, *a, **k)
+    tud.DistributedSampler.__init__ = init
+    print(f"[launcher] DistributedSampler default seed = --seed {seed} (training order reshuffled for this seed)", flush=True)
 
 
 def patch_deepspeed():

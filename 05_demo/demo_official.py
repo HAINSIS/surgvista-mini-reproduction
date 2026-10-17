@@ -65,17 +65,28 @@ def frames_cholect50(video):
 
 
 def frames_mp4(path):
+    """1 frame per second, as CholecT50. Frames are decoded when asked for (the demo reads them in order), not held
+    in memory, so a full-length surgery needs no more RAM than a short clip."""
     cap = cv2.VideoCapture(str(path))
+    assert cap.isOpened(), f"cannot open {path}"
     fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
     n = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) / fps)
-    out = []
-    for s in range(n):  # 1 fps, as CholecT50
-        cap.set(cv2.CAP_PROP_POS_FRAMES, int(round(s * fps)))
-        ok, fr = cap.read()
-        if not ok:
-            break
-        out.append(cv2.resize(cv2.cvtColor(fr, cv2.COLOR_BGR2RGB), (854, 480), interpolation=cv2.INTER_LINEAR))
-    return (lambda i: out[i]), len(out), None, "external"
+    last = {}
+
+    def get(s):
+        if s not in last:
+            cap.set(cv2.CAP_PROP_POS_FRAMES, int(round(s * fps)))
+            ok, fr = cap.read()
+            if ok:
+                fr = cv2.resize(cv2.cvtColor(fr, cv2.COLOR_BGR2RGB), (854, 480), interpolation=cv2.INTER_LINEAR)
+            elif last:  # unreadable frame (damaged file end): repeat the previous second
+                print(f"  warning: second {s} unreadable, previous frame repeated", flush=True)
+                fr = next(iter(last.values()))
+            else:
+                raise RuntimeError(f"cannot read second {s} of {path}")
+            last.clear(); last[s] = fr
+        return last[s]
+    return get, n, None, "external"
 
 
 def clip_ids(t):
@@ -87,14 +98,16 @@ def clip_ids(t):
     return sorted(ids)
 
 
-_DIS = []
+# Component of each triplet, from the official class names "instrument,verb,target". Same rule as ivtmetrics'
+# Disentangle (a component's score = max over the triplets that contain it), without needing the official clone,
+# so the demo runs on any video from a plain checkout. Checked equal to Disentangle: 05_demo/check_disentangle.py.
+_COMP = {c: np.array([CLASSES[k].index(name.split(",")[j]) for name in TRIP])
+         for j, (c, k) in enumerate((("i", "instrument"), ("v", "verb"), ("t", "target")))}
 
 
 def disentangle(probs, comp):  # instrument / verb / target scores from the 100 triplet scores (official mapping)
-    if not _DIS:
-        from triplet_metrics import Disentangle
-        _DIS.append(Disentangle())
-    return _DIS[0].extract(probs[None], comp)[0]
+    ids = _COMP[comp]
+    return np.array([probs[ids == k].max() for k in range(ids.max() + 1)])
 
 
 def render_video(stem, rows, get, n, has_gt, topk, fps, thr):

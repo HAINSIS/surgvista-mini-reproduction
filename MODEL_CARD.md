@@ -21,7 +21,9 @@ python 05_demo/stream_demo.py --ckpt hainsis_triplet_vitb_5ep.pt --mp4 your_vide
 python 05_demo/demo_official.py --ckpt hainsis_triplet_vitb_5ep.pt --mp4 your_video.mp4 --name hainsis_5ep
 ```
 
-Needs the repository code and its requirements; a GPU is optional (CPU works, slower). End-to-end latency (frame
+Needs only the repository code, its requirements and the weight file: no dataset, no `work/` folder and no
+official SurgVISTA clone. A GPU is optional (CPU works, slower). Any resolution and frame rate; frames are read
+one per second, so a full-length surgery needs no more memory than a short clip. End-to-end latency (frame
 arrival to overlay on screen), batch 1, fp32, GTX 1070 laptop GPU: about 147 ms (5-epoch model), 153 ms (MVD, 20 epochs) and 191 ms (SurgVISTA) per
 frame at one frame per second; see `05_demo/output/stream_*_summary.json`.
 
